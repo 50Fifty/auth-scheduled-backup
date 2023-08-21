@@ -1,5 +1,6 @@
 # Firebase Auth Backup Scheduler
 ![Logo of Firebase Authentication](firebase_auth.png "Firebase Auth")
+
 Schedule backups of Firebase Authentication users' data.
 
 **Important Note**: This extension is currently under active development and is not yet ready for production use. Please use it in a test environment only.
