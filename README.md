@@ -1,10 +1,10 @@
 # Firebase Auth Backup Scheduler
 
+**Important Note**: This extension is currently under active development and is not yet ready for production use. Please use it in a test environment only.
+
 **Author**: Foo Jen Sean (www.foojensean.com)
 
 **Description**: Automatically backs up Firebase Authentication users on a predefined schedule.
-
-<span style="color:red">WARNING: This extension is currently still in progress and is not complete yet. It is not recommended for production use. The extension may change in backward-incompatible ways and is not subject to any SLA or deprecation policy. I will not be responsible for any damages caused by the use of this extension.</span>
 
 ## Overview
 The "Firebase Auth Backup Scheduler" extension simplifies the process of regularly backing up Firebase Authentication users' data. By automatically creating backups at a specified interval, this extension provides an extra layer of security and ensures data recoverability for your Firebase project.
@@ -19,7 +19,6 @@ The extension provides customizable scheduling options, allowing you to define h
 ### Installation
 To install the "Firebase Auth Backup Scheduler" extension, use the following Firebase CLI command:
 ```firebase ext:install backup-firebase-auth --project=<projectId_or_alias>```
-
 
 ### Configuration
 TODO: Add instructions for configuring the extension.
