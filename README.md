@@ -1,4 +1,4 @@
-# Firebase Auth Backup Scheduler
+# Firebase Auth Backup Scheduler Extension
 ![Logo of Firebase Authentication](firebase_auth.png "Firebase Auth")
 
 Schedule backups of Firebase Authentication users' data.
