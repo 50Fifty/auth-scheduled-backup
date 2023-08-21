@@ -1,0 +1,70 @@
+# Learn detailed information about the fields of an extension.yaml file in the docs:
+# https://firebase.google.com/docs/extensions/reference/extension-yaml
+
+# Identifier for your extension
+# TODO: Replace this with an descriptive name for your extension.
+name: backup-firebase-auth  
+version: 0.0.1  # Follow semver versioning
+specVersion: v1beta  # Version of the Firebase Extensions specification
+
+# Friendly display name for your extension (~3-5 words)
+displayName: Schedule Firebase Auth Backup
+
+# Brief description of the task your extension performs (~1 sentence)
+description: >-
+  Schedule a daily backup of your Firebase Auth users to a Cloud Storage bucket.
+
+author:
+  authorName: Foo Jen Sean
+  url: https://www.foojensean.com
+
+license: Apache-2.0  # https://spdx.org/licenses/
+
+# Public URL for the source code of your extension.
+# TODO:  Replace this with your GitHub repo.
+sourceUrl: https://github.com/50Fifty/backup-firebase-auth
+
+# Specify whether a paid-tier billing plan is required to use your extension.
+# Learn more in the docs: https://firebase.google.com/docs/extensions/reference/extension-yaml#billing-required-field
+billingRequired: true
+
+# In an `apis` field, list any Google APIs (like Cloud Translation, BigQuery, etc.)
+# required for your extension to operate.
+# Learn more in the docs:
+# https://firebase.google.com/docs/extensions/reference/extension-yaml#apis-field
+
+# In a `roles` field, list any IAM access roles required for your extension to operate.
+# Learn more in the docs:
+# https://firebase.google.com/docs/extensions/reference/extension-yaml#roles-field
+roles:
+  - role: firebaseauth.admin
+    reason: >-
+      The extension needs to be able to list all users in the project.
+  - role: storage.admin
+    reason: >-
+      The extension needs to be able to write to the specified bucket.
+
+# In the `resources` field, list each of your extension's functions, including the trigger for each function.
+# Learn more in the docs:
+# https://firebase.google.com/docs/extensions/reference/extension-yaml#resources-field
+resources:
+  - name: backupAuthUsers
+    type: firebaseextensions.v1beta.function
+    description: >-
+      Scheduled function that will backup auth users to Google Cloud Storage bucket.
+    properties:
+      scheduleTrigger:
+        schedule: "0 16 * * *"
+      runtime: "nodejs16"
+
+# In the `params` field, set up your extension's user-configured parameters.
+# Learn more in the docs:
+# https://firebase.google.com/docs/extensions/reference/extension-yaml#params-field
+params:
+  - param: BUCKET_NAME
+    label: Bucket Name
+    description: >-
+      Google Cloud Storage bucket to backup auth users to.
+    type: selectResource
+    resourceType: storage.googleapis.com/Bucket
+    required: true
