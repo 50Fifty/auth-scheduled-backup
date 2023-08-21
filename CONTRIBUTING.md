@@ -14,6 +14,8 @@ Thank you for considering contributing to the Firebase Auth Backup Scheduler ext
 
 4. Create a New Branch: Create a new branch to work on your changes using the following command:
     ```git checkout -b <branch-name>``` (replace <branch-name> with a descriptive name for your branch)
+    - If you're working on a bug fix, name your branch "bugfix/<issue-number>" (replace <issue-number> with the issue number from GitHub)
+    - If you're working on a new feature, name your branch "feature/<feature-name>" (replace <feature-name> with a descriptive name for your feature)
 
 5. Make Changes: Make any changes you want to the codebase. You can use the following command to check the status of your changes:
     ```git status```
