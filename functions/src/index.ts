@@ -5,22 +5,23 @@ import * as functions from "firebase-functions";
 
 admin.initializeApp({credential: admin.credential.applicationDefault()});
 
-const bucketName = functions.params.defineString('BUCKET_NAME')
+const bucketName = functions.params.defineString('BUCKET_NAME');
+const cronSchedule = functions.params.defineString('CRON_SCHEDULE');
 
 const listAllUsers = async () => {
-    const users: UserRecord[] = []
+    const users: UserRecord[] = [];
 
-    let nextPageToken: string | undefined = undefined
+    let nextPageToken: string | undefined = undefined;
 
     do {
-        const listUsersResult: ListUsersResult = await admin.auth().listUsers(1000, nextPageToken)
-        users.push(...listUsersResult.users)
-        nextPageToken = listUsersResult.pageToken
+        const listUsersResult: ListUsersResult = await admin.auth().listUsers(1000, nextPageToken);
+        users.push(...listUsersResult.users);
+        nextPageToken = listUsersResult.pageToken;
     } while (nextPageToken)
     return users;
 };
 
-exports.backupAuthUsers = functions.pubsub.schedule("0 16 * * *")
+exports.backupAuthUsers = functions.pubsub.schedule(cronSchedule.value())
     .onRun(async (context) => {
 
         if (!bucketName.value()) {
