@@ -28,7 +28,12 @@ To install the "Firebase Auth Backup Scheduler" extension, use the following Fir
 TODO: Add instructions for configuring the extension.
 
 ## Usage
+
+### Exporting Firebase Authentication Users
 The extension runs automatically based on your configured schedule. There is no need for manual intervention after setup. Backups are created and stored in the specified Cloud Storage bucket.
+
+### Importing Firebase Authentication Users
+TODO: Add instructions for importing users from backups. Possibly create a separate extension for this. This will most likely be a done via a Node.js script that uses the Firebase Admin SDK.
 
 ## Billing
 To use this extension, your Firebase project must be on the [Blaze (pay as you go) plan](https://firebase.google.com/pricing) due to its use of Firebase and Google Cloud Platform services. Be aware that this extension uses Cloud Storage for backups, which may incur associated charges based on usage.
