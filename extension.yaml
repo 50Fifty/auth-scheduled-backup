@@ -12,7 +12,7 @@ displayName: Schedule Firebase Auth Backup
 
 # Brief description of the task your extension performs (~1 sentence)
 description: >-
-  Schedule a daily backup of your Firebase Auth users to a Cloud Storage bucket.
+  Schedule a daily/weekly/monthly backup of your Firebase Auth users to a Cloud Storage bucket.
 
 author:
   authorName: Foo Jen Sean
