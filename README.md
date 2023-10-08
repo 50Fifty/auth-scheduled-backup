@@ -38,6 +38,7 @@ Install the extension into your local Firebase project:
 `firebase ext:install /path/to/backup-firebase-auth`
 
 Deploy your extension configuration to your live project:
+
 `firebase deploy --only extensions`
 
 ### Configuration
@@ -62,6 +63,39 @@ The extension requires appropriate IAM roles to access and manage resources in y
 
 ## Contributing
 Contributions to this extension are welcome! Feel free to submit issues, feature requests, or pull requests to enhance its functionality. See the [CONTRIBUTING](CONTRIBUTING.md) guide for more information.
+
+## Development
+To develop this extension locally, you first need to [set up a Firebase project](https://firebase.google.com/docs/projects/learn-more) and [install the Firebase CLI](https://firebase.google.com/docs/cli#install_the_firebase_cli).
+
+Create a new directory for your Firebase project (the project that you want to add the extension to):
+
+`mkdir ~/<your_project_name> && cd ~/<your_project_name>`
+
+Initialize a Firebase project in the working directory:
+
+`firebase init`
+
+When prompted, select the project you want to deploy the extension to.
+
+Clone this repository:
+
+`git clone https://github.com/50Fifty/backup-firebase-auth`
+
+Install dependencies:
+
+`npm install`
+
+Build the extension:
+
+`npm run build`
+
+Run the extension locally:
+
+`firebase serve --only functions`
+
+Deploy your extension configuration to your live project:
+
+`firebase deploy --only extensions`
 
 ## License
 This project is licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for more information.
