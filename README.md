@@ -20,9 +20,25 @@ The extension provides customizable scheduling options, allowing you to define h
 ## Setup
 
 ### Installation
-To install the "Firebase Auth Backup Scheduler" extension, use the following Firebase CLI command:
 
-```firebase ext:install . --project=<projectId_or_alias>```
+To install this extension, you first need to [set up a Firebase project](https://firebase.google.com/docs/projects/learn-more) and [install the Firebase CLI](https://firebase.google.com/docs/cli#install_the_firebase_cli).
+
+Create a new directory for your Firebase project (the project that you want to add the extension to):
+
+`mkdir ~/<your_project_name> && cd ~/<your_project_name>`
+
+Initialize a Firebase project in the working directory:
+
+`firebase init`
+
+When prompted, select the project you want to deploy the extension to.
+
+Install the extension into your local Firebase project:
+
+`firebase ext:install /path/to/backup-firebase-auth`
+
+Deploy your extension configuration to your live project:
+`firebase deploy --only extensions`
 
 ### Configuration
 TODO: Add instructions for configuring the extension.
