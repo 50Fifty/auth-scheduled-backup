@@ -23,23 +23,23 @@ The extension provides customizable scheduling options, allowing you to define h
 
 To install this extension, you first need to [set up a Firebase project](https://firebase.google.com/docs/projects/learn-more) and [install the Firebase CLI](https://firebase.google.com/docs/cli#install_the_firebase_cli).
 
-Create a new directory for your Firebase project (the project that you want to add the extension to):
+1. Create a new directory for your Firebase project (the project that you want to add the extension to):
 
-`mkdir ~/<your_project_name> && cd ~/<your_project_name>`
+    `mkdir ~/<your_project_name> && cd ~/<your_project_name>`
 
-Initialize a Firebase project in the working directory:
+2. Initialize a Firebase project in the working directory:
 
-`firebase init`
+    `firebase init`
 
-When prompted, select the project you want to deploy the extension to.
+3. When prompted, select the project you want to deploy the extension to.
 
-Install the extension into your local Firebase project:
+4. Install the extension into your local Firebase project:
 
-`firebase ext:install /path/to/backup-firebase-auth`
+    `firebase ext:install /path/to/backup-firebase-auth`
 
-Deploy your extension configuration to your live project:
+5. Deploy your extension configuration to your live project:
 
-`firebase deploy --only extensions`
+    `firebase deploy --only extensions`
 
 ### Configuration
 TODO: Add instructions for configuring the extension.
@@ -67,35 +67,35 @@ Contributions to this extension are welcome! Feel free to submit issues, feature
 ## Development
 To develop this extension locally, you first need to [set up a Firebase project](https://firebase.google.com/docs/projects/learn-more) and [install the Firebase CLI](https://firebase.google.com/docs/cli#install_the_firebase_cli).
 
-Create a new directory for your Firebase project (the project that you want to add the extension to):
+1. Create a new directory for your Firebase project (the project that you want to add the extension to):
 
-`mkdir ~/<your_project_name> && cd ~/<your_project_name>`
+    `mkdir ~/<your_project_name> && cd ~/<your_project_name>`
 
-Initialize a Firebase project in the working directory:
+2. Initialize a new or existing Firebase project in the working directory:
 
-`firebase init`
+    `firebase init`
 
-When prompted, select the project you want to deploy the extension to.
+3. When prompted, select the project you want to deploy the extension to.
 
-Clone this repository:
+4. Clone this repository:
 
-`git clone https://github.com/50Fifty/backup-firebase-auth`
+    `git clone https://github.com/50Fifty/backup-firebase-auth`
 
-Install dependencies:
+5. Install dependencies:
 
-`npm install`
+    `npm install`
 
-Build the extension:
+6. Build the extension:
 
-`npm run build`
+    `npm run build`
 
-Run the extension locally:
+7. Run the extension locally:
 
-`firebase serve --only functions`
+    `firebase serve --only functions`
 
-Deploy your extension configuration to your live project:
+8. Deploy your extension configuration to your live project:
 
-`firebase deploy --only extensions`
+    `firebase deploy --only extensions`
 
 ## License
 This project is licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for more information.

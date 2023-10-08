@@ -7,9 +7,12 @@ Learn more about writing a PREINSTALL.md file in the docs:
 https://firebase.google.com/docs/extensions/publishers/user-documentation#writing-preinstall
 -->
 
-Use this extension to backup Firebase Auth.
+# Before you install (important!) ⚠️
 
-When triggered by the time-based scheduler, this extension backs up Firebase Auth to the Google Cloud Storage bucket you specified during installation.
+Before installing and using this extension, ensure that your Firebase project meets the following requirements:
+
+1. This extension requires a paid-tier [Blaze plan](https://firebase.google.com/pricing) because it uses Cloud Storage, which incurs costs.
+2. This extension requires a Cloud Storage bucket to store backups ([Additional charges may apply.](https://cloud.google.com/storage/pricing)). Create a bucket in Google Cloud Platform and note the bucket name. You will select this bucket during installation. [Learn more about creating a Cloud Storage bucket](https://cloud.google.com/storage/docs/creating-buckets).
 
 <!-- We recommend keeping the following section to explain how billing for Firebase Extensions works -->
 # Billing

@@ -12,14 +12,9 @@ https://firebase.google.com/docs/extensions/publishers/user-documentation#writin
 
 # See it in action
 
-You can test out this extension right away!
-
-Visit the following URL:
-${function:greetTheWorld.url}
-
 # Using the extension
 
-When triggered by the time-based scheduler, this extension backs up Firebase Auth to the Google Cloud Storage bucket you specified during installation.
+This extension runs automatically based on your configured schedule. There is no need for manual intervention after setup. Backups are created and stored in the specified Cloud Storage bucket.
 
 To learn more about how this extension works, see the [source code](https://github.com/50Fifty/backup-firebase-auth).
 
