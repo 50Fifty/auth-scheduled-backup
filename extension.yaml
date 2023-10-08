@@ -54,7 +54,7 @@ resources:
       Scheduled function that will backup Authentication users to Google Cloud Storage bucket.
     properties:
       scheduleTrigger:
-        schedule: "0 16 * * *"
+        schedule: ${param:CRON_SCHEDULE}
       runtime: "nodejs16"
 
 # In the `params` field, set up your extension's user-configured parameters.
@@ -64,7 +64,7 @@ params:
   - param: CRON_SCHEDULE
     label: Cron Schedule
     description: >-
-      Cron schedule for when to backup Authentication users.
+      Cron schedule for when to backup Authentication users. See https://crontab.guru/ for help.
     type: string
     validationRegex: ^(\*|([0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9])|\*\/([0-9]|1[0-9]|2[0-9]|3[0-9]|4[0-9]|5[0-9])) (\*|([0-9]|1[0-9]|2[0-3])|\*\/([0-9]|1[0-9]|2[0-3])) (\*|([1-9]|1[0-9]|2[0-9]|3[0-1])|\*\/([1-9]|1[0-9]|2[0-9]|3[0-1])) (\*|([1-9]|1[0-2])|\*\/([1-9]|1[0-2])) (\*|([0-6])|\*\/([0-6]))$
     example: "0 0 * * *"
