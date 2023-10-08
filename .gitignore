@@ -1,3 +1,5 @@
+*.log
+
 ## Compiled JavaScript files
 **/*.js
 **/*.js.map
@@ -5,7 +7,7 @@
 # Typescript v1 declaration files
 typings/
 
-node_modules/
+functions/node_modules/
 
 # Visual Studio Code exclude list
 .vscode/
