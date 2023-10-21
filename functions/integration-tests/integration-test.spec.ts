@@ -1,5 +1,6 @@
 import axios from "axios";
 import { expect } from "chai";
+import { describe, it } from "mocha";
 
 describe("greet-the-world", () => {
   it("should respond with the configured greeting", async () => {
