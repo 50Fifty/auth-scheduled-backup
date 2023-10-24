@@ -1,5 +1,8 @@
 *.log
 
+.firebaserc
+serviceAccountKey.json
+
 ## Compiled JavaScript files
 **/*.js
 **/*.js.map
@@ -13,4 +16,4 @@ functions/node_modules/
 .vscode/
 
 # .env files
-*.env
+.env
