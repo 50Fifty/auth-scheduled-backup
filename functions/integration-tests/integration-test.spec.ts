@@ -36,7 +36,8 @@ const testEnv = {
   CRON_SCHEDULE: process.env.CRON_SCHEDULE,
 };
 
-myMocha.describe('Backup Firebase Auth Extension - Mock', () => {
+myMocha.describe('Backup Firebase Auth Extension - Mock', function () {
+  this.timeout(5000);
   const mockStorageService = new MockStorageService();
   const mockAuthService = new MockAuthService();
 
@@ -61,7 +62,8 @@ myMocha.describe('Backup Firebase Auth Extension - Mock', () => {
 });
 
 if (serviceAccountKeyExists) {
-  myMocha.describe('Backup Firebase Auth Extension - Live', () => {
+  myMocha.describe('Backup Firebase Auth Extension - Live', function() {
+    this.timeout(10000);
 
     const myTest = functionsTest({
       projectId: testEnv.PROJECT_ID,

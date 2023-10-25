@@ -5,7 +5,7 @@
     "lint:fix": "eslint \"src/**/*\" --fix",
     "build": "npm run lint:fix && tsc",
     "build:watch": "tsc --watch",
-    "mocha": "cross-env NODE_ENV=test mocha -r ts-node/register integration-tests/integration-test.spec.ts",
+    "mocha": "mocha -r ts-node/register integration-tests/integration-test.spec.ts",
     "test": "npm run mocha"
   },
   "main": "lib/index.js",
