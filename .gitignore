@@ -1,5 +1,8 @@
 *.log
 
+.firebaserc
+serviceAccountKey.json
+
 ## Compiled JavaScript files
 **/*.js
 **/*.js.map
