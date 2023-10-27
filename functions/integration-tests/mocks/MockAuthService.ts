@@ -55,7 +55,6 @@ export class MockAuthService implements AuthService {
           })
 
         }
-        // ... Add other providers as needed
       ],
       toJSON: () => ({
         uid: "123456789",
@@ -87,7 +86,6 @@ export class MockAuthService implements AuthService {
             uid: "facebook-uid-123456",
             phoneNumber: "+0987654321"
           }
-          // ... Add other providers as needed
         ]
       })
     }
