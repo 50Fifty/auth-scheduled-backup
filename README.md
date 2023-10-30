@@ -3,7 +3,8 @@
 
 This is a Firebase Extension to schedule backups of Firebase Authentication users' data.
 
-⚠️ **Important Note**: This project is currently under development and may contain bugs or incomplete features. Use it at your own risk. 
+> [!WARNING]\
+> This project is currently under development and may contain bugs or incomplete features. Use it at your own risk. 
 
 **Author**: Foo Jen Sean (www.foojensean.com)
 
