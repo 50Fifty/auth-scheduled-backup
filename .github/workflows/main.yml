@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
@@ -28,7 +28,11 @@ jobs:
           npm install
 
       - name: Build
-        run: npm run build --if-present
+        run: |
+          cd functions
+          npm run build --if-present
 
       - name: Run tests
-        run: npm test
+        run: |
+          cd functions
+          npm test
