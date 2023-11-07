@@ -29,7 +29,16 @@ jobs:
           cd functions
           npm run build --if-present
 
+      - name: Create serviceAccountKey.json
+        env:
+          SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+        run: echo $SERVICE_ACCOUNT_KEY | base64 -di > ./functions/integration-tests/extensions/serviceAccountKey.json
+        
       - name: Run tests
+        env:
+          BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
+          CRON_SCHEDULE: ${{ secrets.CRON_SCHEDULE }}
+          PROJECT_ID: ${{ secrets.PROJECT_ID }}
         run: |
           cd functions
           npm test
