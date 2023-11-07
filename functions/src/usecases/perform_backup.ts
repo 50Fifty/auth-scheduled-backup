@@ -14,7 +14,7 @@ import {AuthService} from "../services/AuthService";
  * successfully.
  */
 export async function performBackup(
-  {context, storageService, authService, bucketName, loggerInstance}:
+  {storageService, authService, bucketName, loggerInstance}:
     {
       context: functions.EventContext<Record<string, string>>,
       storageService: StorageService,
