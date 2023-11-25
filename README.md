@@ -2,6 +2,7 @@
 > An Extension for Firebase that automatically backs up Firebase Authentication users' data to a Google Cloud Storage bucket on a predefined schedule.
 
 ![GitHub](https://img.shields.io/github/license/50Fifty/backup-firebase-auth) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/50Fifty/backup-firebase-auth) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/50Fifty/backup-firebase-auth/CI) ![GitHub issues](https://img.shields.io/github/issues/50Fifty/backup-firebase-auth) ![GitHub pull requests](https://img.shields.io/github/issues-pr/50Fifty/backup-firebase-auth) ![GitHub contributors](https://img.shields.io/github/contributors/50Fifty/backup-firebase-auth) ![GitHub last commit](https://img.shields.io/github/last-commit/50Fifty/backup-firebase-auth) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/50Fifty/backup-firebase-auth) ![GitHub All Releases](https://img.shields.io/github/downloads/50Fifty/backup-firebase-auth/total)
+
 ![GitHub stars](https://img.shields.io/github/stars/50Fifty/backup-firebase-auth?style=social) ![GitHub forks](https://img.shields.io/github/forks/50Fifty/backup-firebase-auth?style=social) ![GitHub watchers](https://img.shields.io/github/watchers/50Fifty/backup-firebase-auth?style=social)
 
 > [!WARNING]\
