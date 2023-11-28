@@ -1,6 +1,6 @@
 import * as assert from 'assert';
 import * as myMocha from 'mocha';
-import * as functions from "firebase-functions";
+// import * as functions from "firebase-functions";
 import * as functionsTest from 'firebase-functions-test';
 import { performBackup } from '../src/usecases/perform_backup';
 import { GoogleCloudStorageService } from "../src/services/GoogleCloudStorageService";

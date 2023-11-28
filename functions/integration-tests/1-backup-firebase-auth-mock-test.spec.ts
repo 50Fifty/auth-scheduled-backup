@@ -1,11 +1,11 @@
-import * as assert from 'assert';
+// import * as assert from 'assert';
 import * as myMocha from 'mocha';
 import { performBackup } from '../src/usecases/perform_backup';
 import { MockStorageService } from "./mocks/MockStorageService";
 import { MockAuthService } from "./mocks/MockAuthService";
 import { testEnv } from './test-setup';
 import { logger } from "../src/config";
-import * as functions from "firebase-functions";
+// import * as functions from "firebase-functions";
 
 const testName = "1. Backup Firebase Auth Extension - Mock"
 
