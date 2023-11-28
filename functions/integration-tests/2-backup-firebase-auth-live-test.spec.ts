@@ -38,9 +38,9 @@ if (serviceAccountKeyExists) {
     myMocha.it('Should save users to GCS bucket', async () => {
       await performBackup(
         {
-          context: {} as functions.EventContext<Record<string, string>>,
           storageService: new GoogleCloudStorageService(),
           authService: new FirebaseAuthService(admin.auth()),
+          folderName: new Date().toISOString().replace(/:/g, "-"),
           bucketName: testEnv.BUCKET_NAME,
           loggerInstance: logger
         }

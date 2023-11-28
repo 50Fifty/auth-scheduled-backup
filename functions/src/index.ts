@@ -5,18 +5,20 @@ import {performBackup} from "./usecases/perform_backup";
 import {GoogleCloudStorageService} from "./services/GoogleCloudStorageService";
 import {FirebaseAuthService} from "./services/FirebaseAuthService";
 
-exports.backupAuthUsers = functions.pubsub.schedule(cronSchedule).onRun(async (context) => {
+exports.backupAuthUsers = functions.pubsub.schedule(cronSchedule).onRun(async () => {
   admin.initializeApp({credential: admin.credential.applicationDefault()});
 
   const googleCloudStorageService = new GoogleCloudStorageService();
   const authService = new FirebaseAuthService(admin.auth());
 
+  const curr_datetime = new Date().toISOString().replace(/:/g, "-");
+
   return performBackup(
     {
-      context: context,
       storageService: googleCloudStorageService,
       authService: authService,
       bucketName: process.env.BUCKET_NAME,
+      folderName: curr_datetime,
       loggerInstance: logger,
     }
   );

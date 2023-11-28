@@ -92,7 +92,7 @@ export class MockAuthService implements AuthService {
 
   ];
 
-  async listAllUsers(): Promise<UserRecord[]> {
-    return this.users;
+  async *listAllUsers(): AsyncGenerator<UserRecord[]> {
+    yield this.users;
   }
 }

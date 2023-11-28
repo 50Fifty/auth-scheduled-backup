@@ -1,4 +1,4 @@
-import {Auth, ListUsersResult, UserRecord} from "firebase-admin/auth";
+import { Auth, ListUsersResult, UserRecord } from "firebase-admin/auth";
 
 /**
  * `FirebaseAuthService` provides authentication services specific to Firebase.
@@ -24,22 +24,70 @@ export class FirebaseAuthService {
     this.auth = auth;
   }
 
+  // /**
+  //  * Lists all users in the authentication system, fetching them in batches of up to 1000 at a time.
+  //  *
+  //  * @return {Promise<UserRecord[]>} - An array of `UserRecord` objects representing the users.
+  //  * @async
+  //  */
+  // async listAllUsers(): Promise<UserRecord[]> {
+  //   const users: UserRecord[] = [];
+  //   let nextPageToken: string | undefined = undefined;
+
+  //   do {
+  //     const listUsersResult: ListUsersResult = await this.auth.listUsers(1000, nextPageToken);
+  //     users.push(...listUsersResult.users);
+  //     nextPageToken = listUsersResult.pageToken;
+  //   } while (nextPageToken);
+
+  //   return users;
+  // }
+
+  // async *listAllUsers(): AsyncGenerator<UserRecord[]> {
+  //   let nextPageToken: string | undefined = undefined;
+  //   let curr_users: UserRecord[] = [];
+
+  //   do {
+  //     const listUsersResult: ListUsersResult = await this.auth.listUsers(1000, nextPageToken);
+  //     curr_users.push(...listUsersResult.users);
+  //     nextPageToken = listUsersResult.pageToken;
+  //     if (curr_users.length >= 10000) {
+  //       yield curr_users;
+  //       curr_users = [];
+  //     }
+  //   } while (nextPageToken);
+
+  //   if (curr_users.length > 0) {
+  //     yield curr_users;
+  //   }
+  // }
+
   /**
-   * Lists all users in the authentication system, fetching them in batches of up to 1000 at a time.
-   *
-   * @return {Promise<UserRecord[]>} - An array of `UserRecord` objects representing the users.
-   * @async
+   * Asynchronously generates batches of user records. Each batch can contain up to `perBatchCount` users.
+   * 
+   * @param {number} perBatchCount - The maximum number of user records to include in each batch.
+   *                                 Defaults to 10,000 if not specified.
+   * @yields {UserRecord[]} A batch of user records. Each batch can contain up to `perBatchCount` users.
    */
-  async listAllUsers(): Promise<UserRecord[]> {
-    const users: UserRecord[] = [];
+  async *listAllUsers(perBatchCount: number = 10000, maxResult: number = 1000): AsyncGenerator<UserRecord[]> {
     let nextPageToken: string | undefined = undefined;
+    let users: UserRecord[] = [];
 
-    do {
-      const listUsersResult: ListUsersResult = await this.auth.listUsers(1000, nextPageToken);
+    while (true) {
+      const listUsersResult: ListUsersResult = await this.auth.listUsers(maxResult, nextPageToken);
       users.push(...listUsersResult.users);
-      nextPageToken = listUsersResult.pageToken;
-    } while (nextPageToken);
 
-    return users;
+      nextPageToken = listUsersResult.pageToken;
+
+      if (!nextPageToken) {
+        yield users;
+        break;
+      }
+
+      if (users.length >= perBatchCount) {
+        yield users;
+        users = [];
+      }
+    }
   }
 }
