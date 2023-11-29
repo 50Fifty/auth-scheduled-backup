@@ -1,4 +1,4 @@
-import {StorageService} from "./StorageService";
+import {StorageService} from "./interfaces/StorageService";
 import * as storage from "@google-cloud/storage";
 
 /**
@@ -23,7 +23,7 @@ export class GoogleCloudStorageService implements StorageService {
    */
   async saveFile(bucketName: string, folderName:string, fileName: string, data: string, saveOptions: storage.SaveOptions): Promise<void> {
     const bucket = this.gcs.bucket(bucketName);
-    const file = bucket.file(fileName);
+    const file = bucket.file(`${folderName}/${fileName}`);
     await file.save(data, saveOptions);
   }
 }

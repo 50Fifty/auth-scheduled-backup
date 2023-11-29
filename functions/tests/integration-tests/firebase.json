@@ -8,7 +8,5 @@
     },
     "singleProjectMode": true
   },
-  "extensions": {
-    "backup-firebase-auth": "../.."
-  }
+  "extensions": {}
 }

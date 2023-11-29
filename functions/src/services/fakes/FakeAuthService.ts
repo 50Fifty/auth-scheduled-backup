@@ -1,7 +1,7 @@
 import { UserRecord } from "firebase-admin/auth";
-import { AuthService } from "../../src/services/AuthService";
+import { AuthService } from "../interfaces/AuthService";
 
-export class MockAuthService implements AuthService {
+export class FakeAuthService implements AuthService {
   private users: UserRecord[] = [
     {
       uid: "123456789",

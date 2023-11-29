@@ -32,7 +32,7 @@ jobs:
       - name: Create serviceAccountKey.json
         env:
           SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
-        run: echo $SERVICE_ACCOUNT_KEY | base64 -di > ./functions/integration-tests/extensions/serviceAccountKey.json
+        run: echo $SERVICE_ACCOUNT_KEY | base64 -di > ./functions/tests/system-tests/config/serviceAccountKey.json
         
       - name: Run tests
         env:
@@ -41,4 +41,4 @@ jobs:
           PROJECT_ID: ${{ secrets.PROJECT_ID }}
         run: |
           cd functions
-          npm test
+          npm run test:system

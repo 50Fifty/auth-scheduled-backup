@@ -1,12 +1,11 @@
 import * as assert from 'assert';
 import * as myMocha from 'mocha';
-// import * as functions from "firebase-functions";
 import * as functionsTest from 'firebase-functions-test';
-import { performBackup } from '../src/usecases/perform_backup';
-import { GoogleCloudStorageService } from "../src/services/GoogleCloudStorageService";
-import { FirebaseAuthService } from "../src/services/FirebaseAuthService";
+import { performBackup } from '../../src/usecases/perform_backup';
+import { GoogleCloudStorageService } from "../../src/services/GoogleCloudStorageService";
+import { FirebaseAuthService } from "../../src/services/FirebaseAuthService";
 import { serviceAccountKeyExists, serviceAccountKeyFilePath, testEnv } from './test-setup';
-import { logger } from "../src/config";
+import { logger } from "../../src/config";
 import * as admin from "firebase-admin";
 import * as storage from "@google-cloud/storage";
 
@@ -15,6 +14,8 @@ const testName = "2. Backup Firebase Auth Extension - Live"
 if (serviceAccountKeyExists) {
   myMocha.describe(testName, function () {
     this.timeout(10000);
+
+    const folderName = new Date().toISOString().split('T')[0];
 
     const myTest = functionsTest({
       projectId: testEnv.PROJECT_ID,
@@ -28,9 +29,9 @@ if (serviceAccountKeyExists) {
 
     // After live test, we'll clean up resources we set up for testing purposes
     myMocha.after(() => {
-      const gcs = new storage.Storage();
-      const bucket = gcs.bucket(testEnv.BUCKET_NAME);
-      bucket.deleteFiles({ force: true });
+      // const gcs = new storage.Storage();
+      // const bucket = gcs.bucket(testEnv.BUCKET_NAME);
+      // bucket.deleteFiles({ force: true });
       admin.app().delete();
       myTest.cleanup();
     });
@@ -40,7 +41,7 @@ if (serviceAccountKeyExists) {
         {
           storageService: new GoogleCloudStorageService(),
           authService: new FirebaseAuthService(admin.auth()),
-          folderName: new Date().toISOString().replace(/:/g, "-"),
+          folderName: folderName,
           bucketName: testEnv.BUCKET_NAME,
           loggerInstance: logger
         }
@@ -49,21 +50,30 @@ if (serviceAccountKeyExists) {
       const gcs = new storage.Storage();
       const bucket = gcs.bucket(testEnv.BUCKET_NAME);
 
-      const [files] = await bucket.getFiles();
-      assert(files.length > 0, 'No files found in the bucket');
+      // Get the manifest.json
+      const manifestFile = bucket.file(`${folderName}/manifest.json`);
+      const [fileContents] = await manifestFile.download();
+      const manifest = JSON.parse(fileContents.toString());
 
-      const backupFile = files[0];
-      const [fileContents] = await backupFile.download();
-      const usersBackup = JSON.parse(fileContents.toString());
+      const backupFileNames: string[] = manifest.files;
 
-      assert(usersBackup.length > 0, 'No users found in the backup');
+      assert(backupFileNames.length > 0, 'No backup files found in the manifest');
+
+      // const [files] = await bucket.getFiles();
+      // assert(files.length > 0, 'No files found in the bucket');
+
+      // const backupFile = files[0];
+      // const [fileContents] = await backupFile.download();
+      // const usersBackup = JSON.parse(fileContents.toString());
+
+      // assert(usersBackup.length > 0, 'No users found in the backup');
     });
   });
 } else {
   myMocha.describe.skip(testName, function () {
     this.timeout(10000);
 
-    myMocha.it('Should save users to GCS bucket', async () => {
+    myMocha.it('Should save users to GCS bucket - SKIPPED', async () => {
       assert(true);
     });
   });

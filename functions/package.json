@@ -5,11 +5,13 @@
     "lint:fix": "eslint \"src/**/*\" --fix",
     "build": "npm run lint:fix && tsc",
     "build:watch": "tsc --watch",
-    "mocha": "mocha -r ts-node/register integration-tests/**/*.spec.ts",
-    "test": "npm run mocha"
+    "test:unit": "mocha -r ts-node/register tests/unit-tests/**/*.spec.ts",
+    "test:integration": "mocha -r ts-node/register tests/integration-tests/**/*.spec.ts",
+    "test:system": "mocha -r ts-node/register tests/system-tests/**/*.spec.ts"
   },
   "main": "lib/index.js",
   "dependencies": {
+    "@google-cloud/pubsub": "^4.0.7",
     "@google-cloud/storage": "^7.1.0",
     "dotenv": "^16.3.1",
     "firebase-admin": "^11.5.0",

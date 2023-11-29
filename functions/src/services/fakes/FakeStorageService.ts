@@ -1,6 +1,6 @@
-import { StorageService } from "../../src/services/StorageService";
+import { StorageService } from "../interfaces/StorageService";
 
-export class MockStorageService implements StorageService {
+export class FakeStorageService implements StorageService {
   // Using a Map to store data in-memory
   private storage: Map<string, Map<string, string>> = new Map();
 
