@@ -8,6 +8,7 @@ import { serviceAccountKeyExists, serviceAccountKeyFilePath, testEnv } from './t
 import { logger } from "../../src/config";
 import * as admin from "firebase-admin";
 import * as storage from "@google-cloud/storage";
+import { Manifest } from '../../src/files/manifest';
 
 const testName = "2. Backup Firebase Auth Extension - Live"
 
@@ -53,11 +54,27 @@ if (serviceAccountKeyExists) {
       // Get the manifest.json
       const manifestFile = bucket.file(`${folderName}/manifest.json`);
       const [fileContents] = await manifestFile.download();
-      const manifest = JSON.parse(fileContents.toString());
+      const manifest = Manifest.fromJSON(JSON.parse(fileContents.toString()));
+      assert(manifest.getNumOfFiles() === manifest.getNumOfChunks(), `Number of backup files (${manifest.getNumOfFiles()}) does not match number of chunks (${manifest.getNumOfChunks()}) in manifest.json`);
 
-      const backupFileNames: string[] = manifest.files;
+      // Get the backup files
+      // for (const fileName of backupFileNames) {
+      //   const backupFile = bucket.file(`${folderName}/${fileName}`);
+      //   const [fileContents] = await backupFile.download();
+      //   const usersBackup = JSON.parse(fileContents.toString());
 
-      assert(backupFileNames.length > 0, 'No backup files found in the manifest');
+      const backupFiles = manifest.getFiles();
+
+      for (const [fileName, fileData] of backupFiles) {
+        const backupFile = bucket.file(`${folderName}/${fileName}`);
+        const [fileContents] = await backupFile.download();
+        const usersBackup = JSON.parse(fileContents.toString());
+
+        assert(usersBackup.length === fileData.count, `Number of users in ${folderName}/${fileName} backup file does not match number of users in manifest.json`);
+      }
+
+      //   assert(usersBackup.length === manifest.files.get(fileName), `Number of users in ${folderName}/${fileName} backup file does not match number of users in manifest.json`);
+      // }
 
       // const [files] = await bucket.getFiles();
       // assert(files.length > 0, 'No files found in the bucket');

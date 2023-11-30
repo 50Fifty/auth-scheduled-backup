@@ -2,6 +2,7 @@ import * as storage from "@google-cloud/storage";
 import * as functions from "firebase-functions";
 import { StorageService } from "../services/interfaces/StorageService";
 import { AuthService } from "../services/interfaces/AuthService";
+import { Manifest } from "../files/manifest";
 
 /**
  * Asynchronously performs a backup of user data.
@@ -33,14 +34,7 @@ export async function performBackup(
     return;
   }
 
-  const manifestFileName = "manifest.json";
-  let manifest: any = {
-    bucketName: bucketName,
-    completedAt: null,
-    files: [],
-    folderName: folderName,
-    numOfChunks: 0
-  }
+  const manifest = new Manifest(bucketName, folderName);
 
   const saveOptions: storage.SaveOptions = {
     contentType: "application/json",
@@ -49,26 +43,22 @@ export async function performBackup(
     },
   };
 
-  let index = 0;
+  let index = 1;
 
   for await (const users of authService.listAllUsers()) {
-    index++;
     const backupData = JSON.stringify(users);
     const fileName = `users_chunk_${index}.json`;
 
-    // Add to manifest.json
-    manifest.files.push(fileName);
-    manifest.numOfChunks++;
-    const manifestData = JSON.stringify(manifest);
-    
-    await storageService.saveFile(bucketName, folderName, manifestFileName, manifestData, saveOptions); // update manifest.json before saving chunk
-
+    manifest.addFile(fileName, users.length);
+    const manifestData = JSON.stringify(manifest.toJSON());
+    // Update manifest.json before saving chunk
+    await storageService.saveFile(bucketName, folderName, Manifest.fileName, manifestData, saveOptions);
+    // Save chunk
     await storageService.saveFile(bucketName, folderName, fileName, backupData, saveOptions);
-
     loggerInstance.log(`Users backup successfully saved to ${fileName}.`);
+    index++;
   }
 
-  manifest.completedAt = new Date().toISOString();
-  const manifestData = JSON.stringify(manifest);
-  await storageService.saveFile(bucketName, folderName, manifestFileName, manifestData, saveOptions);
+  const manifestData = JSON.stringify(manifest.toJSON({ completed: true }));
+  await storageService.saveFile(bucketName, folderName, Manifest.fileName, manifestData, saveOptions);
 }
