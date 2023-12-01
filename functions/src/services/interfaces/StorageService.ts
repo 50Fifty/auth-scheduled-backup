@@ -18,4 +18,5 @@ export interface StorageService {
    * @returns {Promise<void>} - Promise that resolves when the file is saved.
    */
   saveFile(bucketName: string, folderName: string, fileName: string, data: string, saveOptions: storage.SaveOptions): Promise<void>;
+  getFile({ bucketName, folderName, fileName }: { bucketName: string, folderName: string, fileName: string }): Promise<string | undefined>;
 }

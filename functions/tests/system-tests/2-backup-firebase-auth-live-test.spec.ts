@@ -7,7 +7,6 @@ import { FirebaseAuthService } from "../../src/services/FirebaseAuthService";
 import { serviceAccountKeyExists, serviceAccountKeyFilePath, testEnv } from './test-setup';
 import { logger } from "../../src/config";
 import * as admin from "firebase-admin";
-import * as storage from "@google-cloud/storage";
 import { Manifest } from '../../src/files/manifest';
 
 const testName = "2. Backup Firebase Auth Extension - Live"
@@ -38,9 +37,11 @@ if (serviceAccountKeyExists) {
     });
 
     myMocha.it('Should save users to GCS bucket', async () => {
+      const googleCloudStorageService = new GoogleCloudStorageService();
+
       await performBackup(
         {
-          storageService: new GoogleCloudStorageService(),
+          storageService: googleCloudStorageService,
           authService: new FirebaseAuthService(admin.auth()),
           folderName: folderName,
           bucketName: testEnv.BUCKET_NAME,
@@ -48,42 +49,19 @@ if (serviceAccountKeyExists) {
         }
       );
 
-      const gcs = new storage.Storage();
-      const bucket = gcs.bucket(testEnv.BUCKET_NAME);
-
-      // Get the manifest.json
-      const manifestFile = bucket.file(`${folderName}/manifest.json`);
-      const [fileContents] = await manifestFile.download();
-      const manifest = Manifest.fromJSON(JSON.parse(fileContents.toString()));
+      const manifestData = await googleCloudStorageService.getFile({ bucketName: testEnv.BUCKET_NAME, folderName: folderName, fileName: Manifest.fileName })
+      const manifest = Manifest.fromJSON(JSON.parse(manifestData));
       assert(manifest.getNumOfFiles() === manifest.getNumOfChunks(), `Number of backup files (${manifest.getNumOfFiles()}) does not match number of chunks (${manifest.getNumOfChunks()}) in manifest.json`);
-
-      // Get the backup files
-      // for (const fileName of backupFileNames) {
-      //   const backupFile = bucket.file(`${folderName}/${fileName}`);
-      //   const [fileContents] = await backupFile.download();
-      //   const usersBackup = JSON.parse(fileContents.toString());
 
       const backupFiles = manifest.getFiles();
 
       for (const [fileName, fileData] of backupFiles) {
-        const backupFile = bucket.file(`${folderName}/${fileName}`);
-        const [fileContents] = await backupFile.download();
-        const usersBackup = JSON.parse(fileContents.toString());
+        // const backupFile = bucket.file(`${folderName}/${fileName}`);
+        const fileContents = await googleCloudStorageService.getFile({ bucketName: testEnv.BUCKET_NAME, folderName: folderName, fileName: fileName });
+        const usersBackup = JSON.parse(fileContents);
 
         assert(usersBackup.length === fileData.count, `Number of users in ${folderName}/${fileName} backup file does not match number of users in manifest.json`);
       }
-
-      //   assert(usersBackup.length === manifest.files.get(fileName), `Number of users in ${folderName}/${fileName} backup file does not match number of users in manifest.json`);
-      // }
-
-      // const [files] = await bucket.getFiles();
-      // assert(files.length > 0, 'No files found in the bucket');
-
-      // const backupFile = files[0];
-      // const [fileContents] = await backupFile.download();
-      // const usersBackup = JSON.parse(fileContents.toString());
-
-      // assert(usersBackup.length > 0, 'No users found in the backup');
     });
   });
 } else {

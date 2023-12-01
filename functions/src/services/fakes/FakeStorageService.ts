@@ -1,25 +1,14 @@
 import { StorageService } from "../interfaces/StorageService";
+import * as fs from "fs";
 
 export class FakeStorageService implements StorageService {
-  // Using a Map to store data in-memory
-  private storage: Map<string, Map<string, string>> = new Map();
-
-  async saveFile(bucketName: string, fileName: string, data: string): Promise<void> {
-    let bucket = this.storage.get(bucketName);
-
-    // If the bucket doesn't exist, create it
-    if (!bucket) {
-      bucket = new Map<string, string>();
-      this.storage.set(bucketName, bucket);
-    }
-
-    // Save file content to the bucket in-memory
-    bucket.set(fileName, data);
+  async saveFile(bucketName: string, folderName: string, fileName: string, data: string): Promise<void> {
+    fs.mkdirSync(`tests/system-tests/results/${bucketName}/${folderName}`, { recursive: true });
+    fs.writeFileSync(`tests/system-tests/results/${bucketName}/${folderName}/${fileName}`, data);
   }
-
   // Helper method to retrieve a file, useful for assertions in tests
-  getFile({bucketName, fileName}: {bucketName: string, fileName: string}): string | undefined {
-    const bucket = this.storage.get(bucketName);
-    return bucket?.get(fileName);
+  async getFile({ bucketName, folderName, fileName }: { bucketName: string, folderName: string, fileName: string }): Promise<string | undefined> {
+    const fileContent = fs.readFileSync(`tests/system-tests/results/${bucketName}/${folderName}/${fileName}`, 'utf8');
+    return Promise.resolve(fileContent);
   }
 }

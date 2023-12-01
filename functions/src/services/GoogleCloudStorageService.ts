@@ -26,4 +26,11 @@ export class GoogleCloudStorageService implements StorageService {
     const file = bucket.file(`${folderName}/${fileName}`);
     await file.save(data, saveOptions);
   }
+
+  async getFile({ bucketName, folderName, fileName }: { bucketName: string, folderName: string, fileName: string }): Promise<string> {
+    const bucket = this.gcs.bucket(bucketName);
+    const file = bucket.file(`${folderName}/${fileName}`);
+    const [data] = await file.download();
+    return data.toString();
+  }
 }

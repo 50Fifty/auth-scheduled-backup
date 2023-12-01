@@ -1,8 +1,8 @@
-import * as storage from "@google-cloud/storage";
 import * as functions from "firebase-functions";
 import { StorageService } from "../services/interfaces/StorageService";
 import { AuthService } from "../services/interfaces/AuthService";
 import { Manifest } from "../files/manifest";
+import { saveOptions } from "../options/storage_options";
 
 /**
  * Asynchronously performs a backup of user data.
@@ -35,13 +35,6 @@ export async function performBackup(
   }
 
   const manifest = new Manifest(bucketName, folderName);
-
-  const saveOptions: storage.SaveOptions = {
-    contentType: "application/json",
-    metadata: {
-      cacheControl: "no-cache",
-    },
-  };
 
   let index = 1;
 

@@ -110,7 +110,7 @@ To develop this extension locally, you first need to [set up a Firebase project]
 ### System Tests
 To run the system tests, you first need to [set up a Firebase project](https://firebase.google.com/docs/projects/learn-more) and [install the Firebase CLI](https://firebase.google.com/docs/cli#install_the_firebase_cli).
 
-1. Create a `.env` file in `functions/tests/system-tests/config` with the following contents:
+1. Create a `.env` file in `functions/tests/system-tests/configs` with the following contents:
 
     ```
     PROJECT_ID="<project id>" # Optional: Project ID of the Firebase project to test with, if you want to test with a live project
@@ -119,7 +119,7 @@ To run the system tests, you first need to [set up a Firebase project](https://f
     ```
     You can refer to the `sample.env` file in the same folder for an example.
 
-2. Optional: Download a service account key for the Firebase project you want to test with and save it as `functions/tests/system-tests/config/serviceAccountKey.json`. This is required if you want to test the extension with a live Firebase project in addition to using the fakes.
+2. Optional: Download a service account key for the Firebase project you want to test with and save it as `functions/tests/system-tests/configs/serviceAccountKey.json`. This is required if you want to test the extension with a live Firebase project in addition to using the fakes.
 
 3. Run the system tests:
     `npm run test:system`
