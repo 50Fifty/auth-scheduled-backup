@@ -27,6 +27,16 @@ export class GoogleCloudStorageService implements StorageService {
     await file.save(data, saveOptions);
   }
 
+  /**
+   * Get a file from a specified Google Cloud Storage bucket.
+   * 
+   * @async
+   * @param {string} bucketName - Name of the bucket to get the file from.
+   * @param {string} folderName - Name of the folder to get the file from.
+   * @param {string} fileName - Name of the file to be retrieved.
+   * @throws {Error} Throws an error if retrieving the file fails.
+   * @return {Promise<string>} - Returns the data content of the file.
+   */
   async getFile({ bucketName, folderName, fileName }: { bucketName: string, folderName: string, fileName: string }): Promise<string> {
     const bucket = this.gcs.bucket(bucketName);
     const file = bucket.file(`${folderName}/${fileName}`);
