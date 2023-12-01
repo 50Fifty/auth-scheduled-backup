@@ -32,7 +32,7 @@ jobs:
       - name: Create serviceAccountKey.json
         env:
           SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
-        run: echo $SERVICE_ACCOUNT_KEY | base64 -di > ./functions/tests/system-tests/configs/serviceAccountKey.json
+        run: echo $SERVICE_ACCOUNT_KEY | base64 -di > ./functions/tests/configs/serviceAccountKey.json
         
       - name: Run tests
         env:

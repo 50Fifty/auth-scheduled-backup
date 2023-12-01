@@ -4,8 +4,13 @@ import {cronSchedule, logger} from "./config";
 import {performBackup} from "./usecases/perform_backup";
 import {GoogleCloudStorageService} from "./services/GoogleCloudStorageService";
 import {FirebaseAuthService} from "./services/FirebaseAuthService";
+import * as dotenv from "dotenv";
 
 exports.backupAuthUsers = functions.pubsub.schedule(cronSchedule).onRun(async () => {
+  if (process.env.FUNCTIONS_EMULATOR) {
+    dotenv.config({ path: "./tests/configs/.env" });
+  }
+
   admin.initializeApp({credential: admin.credential.applicationDefault()});
 
   const googleCloudStorageService = new GoogleCloudStorageService();
@@ -13,11 +18,13 @@ exports.backupAuthUsers = functions.pubsub.schedule(cronSchedule).onRun(async ()
 
   const curr_datetime = new Date().toISOString().split('T')[0];
 
+  const bucketName = process.env.BUCKET_NAME;
+
   return performBackup(
     {
       storageService: googleCloudStorageService,
       authService: firebaseAuthService,
-      bucketName: process.env.BUCKET_NAME,
+      bucketName: bucketName,
       folderName: curr_datetime,
       loggerInstance: logger,
     }
