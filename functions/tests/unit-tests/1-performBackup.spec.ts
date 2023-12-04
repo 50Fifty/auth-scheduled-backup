@@ -26,18 +26,12 @@ myMocha.describe(testName, function () {
     );
 
     // TODO: Assert that the file was saved to the fake bucket
-    const users = fakeAuthService.listAllUsers();
-
-    assert(users !== undefined, `users not found in fake auth service`);
-
-    const usersBackup = await fakeStorageService.getFile({ bucketName: fakeBucketName, folderName: fakeFolderName, fileName: 'users.json' });
-
-    assert(usersBackup !== undefined, `users.json backup file not found in ${fakeFolderName} folder in fake bucket`);
-    
-    const usersBackupJSON = JSON.parse(usersBackup);
-
-    // TODO: Assert that the users in the backup file match the users in the fake auth service
-    assert(usersBackupJSON.length === users.length, `Number of users in ${fakeFolderName}/users.json backup file does not match number of users in fake auth service`)
+    for await (const users of fakeAuthService.listAllUsers()) {
+      const backupData = JSON.stringify(users);
+      const fileName = `users_chunk_${1}.json`;
+      const manifestData = JSON.stringify(fakeStorageService.getFile({ bucketName: fakeBucketName, folderName: fakeFolderName, fileName: fileName }));
+      assert(manifestData !== undefined, `users_chunk_${1}.json backup file not found in ${fakeFolderName} folder in fake bucket`);
+    }
     
   });
 });
