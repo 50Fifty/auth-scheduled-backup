@@ -19,4 +19,4 @@ functions/node_modules/
 .env
 
 # results of mock system test
-functions/tests/system-tests/results
+functions/tests/unit-tests/results

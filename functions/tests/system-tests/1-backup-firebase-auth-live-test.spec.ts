@@ -9,7 +9,7 @@ import { logger } from "../../src/config";
 import * as admin from "firebase-admin";
 import { Manifest } from '../../src/files/manifest';
 
-const testName = "2. Backup Firebase Auth Extension - Live"
+const testName = "1. Backup Firebase Auth Extension - Live"
 
 if (serviceAccountKeyExists) {
   myMocha.describe(testName, function () {
