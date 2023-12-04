@@ -9,12 +9,12 @@ import { logger } from "../../src/config";
 import * as admin from "firebase-admin";
 import { Manifest } from '../../src/files/manifest';
 
-const testName = "1. Backup Firebase Auth Extension - Live"
+const testName = "1. System Test: performBackup with live Firebase Auth"
 
 if (serviceAccountKeyExists) {
   myMocha.describe(testName, function () {
     this.timeout(10000);
-
+    const googleCloudStorageService = new GoogleCloudStorageService();
     const folderName = new Date().toISOString().split('T')[0];
 
     const myTest = functionsTest({
@@ -29,16 +29,12 @@ if (serviceAccountKeyExists) {
 
     // After live test, we'll clean up resources we set up for testing purposes
     myMocha.after(() => {
-      // const gcs = new storage.Storage();
-      // const bucket = gcs.bucket(testEnv.BUCKET_NAME);
-      // bucket.deleteFiles({ force: true });
+      googleCloudStorageService.deleteBackupFiles(testEnv.BUCKET_NAME, folderName);
       admin.app().delete();
       myTest.cleanup();
     });
 
     myMocha.it('Should save users to GCS bucket', async () => {
-      const googleCloudStorageService = new GoogleCloudStorageService();
-
       await performBackup(
         {
           storageService: googleCloudStorageService,
@@ -56,7 +52,6 @@ if (serviceAccountKeyExists) {
       const backupFiles = manifest.getFiles();
 
       for (const [fileName, fileData] of backupFiles) {
-        // const backupFile = bucket.file(`${folderName}/${fileName}`);
         const fileContents = await googleCloudStorageService.getFile({ bucketName: testEnv.BUCKET_NAME, folderName: folderName, fileName: fileName });
         const usersBackup = JSON.parse(fileContents);
 

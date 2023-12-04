@@ -1,4 +1,5 @@
 import { Auth, ListUsersResult, UserRecord } from "firebase-admin/auth";
+import { AuthService } from "./interfaces/AuthService";
 
 /**
  * `FirebaseAuthService` provides authentication services specific to Firebase.
@@ -7,7 +8,7 @@ import { Auth, ListUsersResult, UserRecord } from "firebase-admin/auth";
  *
  * @implements {AuthService}
  */
-export class FirebaseAuthService {
+export class FirebaseAuthService implements AuthService {
   /**
    * An instance of the core `Auth` class used for handling authentication operations.
    * @private
@@ -67,9 +68,10 @@ export class FirebaseAuthService {
    * 
    * @param {number} perBatchCount - The maximum number of user records to include in each batch.
    *                                 Defaults to 10,000 if not specified.
+   * @param {number} maxResult - The maximum number of user records to fetch at a time from listUsers API (max: 1000).
    * @yields {UserRecord[]} A batch of user records. Each batch can contain up to `perBatchCount` users.
    */
-  async *listAllUsers(perBatchCount: number = 10000, maxResult: number = 1000): AsyncGenerator<UserRecord[]> {
+  async *listAllUsers({ perBatchCount = 10000, maxResult = 1000 } : { perBatchCount?: number, maxResult?: number } = {}): AsyncGenerator<UserRecord[]> {
     let nextPageToken: string | undefined = undefined;
     let users: UserRecord[] = [];
 

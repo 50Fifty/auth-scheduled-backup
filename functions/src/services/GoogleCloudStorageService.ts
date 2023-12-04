@@ -43,4 +43,9 @@ export class GoogleCloudStorageService implements StorageService {
     const [data] = await file.download();
     return data.toString();
   }
+
+  async deleteBackupFiles(bucketName: string, folderName: string): Promise<void> {
+    const bucket = this.gcs.bucket(bucketName);
+    await bucket.deleteFiles({ prefix: folderName });
+  }
 }
