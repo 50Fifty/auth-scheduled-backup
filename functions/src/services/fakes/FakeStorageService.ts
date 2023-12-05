@@ -11,4 +11,8 @@ export class FakeStorageService implements StorageService {
     const fileContent = fs.readFileSync(`tests/unit-tests/results/${bucketName}/${folderName}/${fileName}`, 'utf8');
     return Promise.resolve(fileContent);
   }
+
+  async deleteFolder(bucketName: string, folderName: string): Promise<void> {
+    fs.rmdirSync(`tests/unit-tests/results/${bucketName}/${folderName}`, { recursive: true });
+  }
 }

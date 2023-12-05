@@ -19,4 +19,5 @@ export interface StorageService {
    */
   saveFile(bucketName: string, folderName: string, fileName: string, data: string, saveOptions: storage.SaveOptions): Promise<void>;
   getFile({ bucketName, folderName, fileName }: { bucketName: string, folderName: string, fileName: string }): Promise<string | undefined>;
+  deleteFolder(bucketName: string, folderName: string): Promise<void>;
 }

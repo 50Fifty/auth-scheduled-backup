@@ -29,7 +29,7 @@ if (serviceAccountKeyExists) {
 
     // After live test, we'll clean up resources we set up for testing purposes
     myMocha.after(() => {
-      googleCloudStorageService.deleteBackupFiles(testEnv.BUCKET_NAME, folderName);
+      googleCloudStorageService.deleteFolder(testEnv.BUCKET_NAME, folderName);
       admin.app().delete();
       myTest.cleanup();
     });

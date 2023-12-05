@@ -44,7 +44,16 @@ export class GoogleCloudStorageService implements StorageService {
     return data.toString();
   }
 
-  async deleteBackupFiles(bucketName: string, folderName: string): Promise<void> {
+  /**
+   * Deletes a folder and all files inside it from a specified Google Cloud Storage bucket.
+   * 
+   * @async
+   * @param {string} bucketName - Name of the bucket to delete the file from.
+   * @param {string} folderName - Name of the folder to delete.
+   * @throws {Error} Throws an error if deleting the file fails.
+   * @return {Promise<void>}
+   */
+  async deleteFolder(bucketName: string, folderName: string): Promise<void> {
     const bucket = this.gcs.bucket(bucketName);
     await bucket.deleteFiles({ prefix: folderName });
   }

@@ -4,8 +4,8 @@ import { AuthService } from "../interfaces/AuthService";
 export class FakeAuthService implements AuthService {
   private users: UserRecord[] = mock_users;
 
-  async *listAllUsers(): AsyncGenerator<UserRecord[]> {
-    yield this.users;
+  async *listAllUsers({ perBatchCount = 10000}: { perBatchCount?: number, maxResult?: number } = {}): AsyncGenerator<UserRecord[]> {
+    yield this.users.slice(0, perBatchCount);
   }
 }
 
