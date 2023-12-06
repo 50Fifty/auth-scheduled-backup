@@ -4,67 +4,62 @@ import * as functionsTest from 'firebase-functions-test';
 import { performBackup } from '../../src/usecases/perform_backup';
 import { GoogleCloudStorageService } from "../../src/services/GoogleCloudStorageService";
 import { FirebaseAuthService } from "../../src/services/FirebaseAuthService";
-import { serviceAccountKeyExists, serviceAccountKeyFilePath, testEnv } from './test-setup';
+import { serviceAccountKeyExists, serviceAccountKeyFilePath, testEnvConfig } from './test-setup';
 import { logger } from "../../src/config";
 import * as admin from "firebase-admin";
 import { Manifest } from '../../src/files/manifest';
 
 const testName = "1. System Test: performBackup with live Firebase Auth"
 
-if (serviceAccountKeyExists) {
-  myMocha.describe(testName, function () {
-    this.timeout(10000);
-    const googleCloudStorageService = new GoogleCloudStorageService();
-    const folderName = new Date().toISOString().split('T')[0];
+myMocha.describe(testName, function () {
+  this.timeout(10000);
+  const googleCloudStorageService = new GoogleCloudStorageService();
+  const folderName = new Date().toISOString().split('T')[0];
 
-    const myTest = functionsTest({
-      projectId: testEnv.PROJECT_ID,
-      databaseURL: `https://${testEnv.PROJECT_ID}.firebaseio.com`,
-    }, serviceAccountKeyFilePath);
+  const myTest = functionsTest({
+    projectId: testEnvConfig.PROJECT_ID,
+    databaseURL: `https://${testEnvConfig.PROJECT_ID}.firebaseio.com`,
+  }, serviceAccountKeyFilePath);
 
-    // Before live test, we'll initialize the app
-    myMocha.before(() => {
-      admin.initializeApp();
-    });
+  // Before live test, we'll initialize the app
+  myMocha.before(function () {
+    admin.initializeApp();
+  });
 
-    // After live test, we'll clean up resources we set up for testing purposes
-    myMocha.after(() => {
-      googleCloudStorageService.deleteFolder(testEnv.BUCKET_NAME, folderName);
-      admin.app().delete();
-      myTest.cleanup();
-    });
+  // After live test, we'll clean up resources we set up for testing purposes
+  myMocha.after(function () {
+    googleCloudStorageService.deleteFolder({ bucketName: testEnvConfig.BUCKET_NAME, folderName: folderName });
+    admin.app().delete();
+    myTest.cleanup();
+  });
 
-    myMocha.it('Should save users to GCS bucket', async () => {
-      await performBackup(
-        {
-          storageService: googleCloudStorageService,
-          authService: new FirebaseAuthService(admin.auth()),
-          folderName: folderName,
-          bucketName: testEnv.BUCKET_NAME,
-          loggerInstance: logger
-        }
-      );
+  myMocha.it('Should save users to GCS bucket', async function () {
 
-      const manifestData = await googleCloudStorageService.getFile({ bucketName: testEnv.BUCKET_NAME, folderName: folderName, fileName: Manifest.fileName })
-      const manifest = Manifest.fromJSON(JSON.parse(manifestData));
-      assert(manifest.getNumOfFiles() === manifest.getNumOfChunks(), `Number of backup files (${manifest.getNumOfFiles()}) does not match number of chunks (${manifest.getNumOfChunks()}) in manifest.json`);
+    if (!serviceAccountKeyExists) {
+      this.skip();
+    }
 
-      const backupFiles = manifest.getFiles();
-
-      for (const [fileName, fileData] of backupFiles) {
-        const fileContents = await googleCloudStorageService.getFile({ bucketName: testEnv.BUCKET_NAME, folderName: folderName, fileName: fileName });
-        const usersBackup = JSON.parse(fileContents);
-
-        assert(usersBackup.length === fileData.count, `Number of users in ${folderName}/${fileName} backup file does not match number of users in manifest.json`);
+    await performBackup(
+      {
+        storageService: googleCloudStorageService,
+        authService: new FirebaseAuthService(admin.auth()),
+        folderName: folderName,
+        bucketName: testEnvConfig.BUCKET_NAME,
+        loggerInstance: logger
       }
-    });
-  });
-} else {
-  myMocha.describe.skip(testName, function () {
-    this.timeout(10000);
+    );
 
-    myMocha.it('Should save users to GCS bucket - SKIPPED', async () => {
-      assert(true);
-    });
+    const manifestData = await googleCloudStorageService.getFile({ bucketName: testEnvConfig.BUCKET_NAME, folderName: folderName, fileName: Manifest.fileName })
+    const manifest = Manifest.fromJSON(JSON.parse(manifestData));
+    assert(manifest.getNumOfFiles() === manifest.getNumOfChunks(), `Number of backup files (${manifest.getNumOfFiles()}) does not match number of chunks (${manifest.getNumOfChunks()}) in manifest.json`);
+
+    const backupFiles = manifest.getFiles();
+
+    for (const [fileName, fileData] of backupFiles) {
+      const fileContents = await googleCloudStorageService.getFile({ bucketName: testEnvConfig.BUCKET_NAME, folderName: folderName, fileName: fileName });
+      const usersBackup = JSON.parse(fileContents);
+
+      assert(usersBackup.length === fileData.count, `Number of users in ${folderName}/${fileName} backup file does not match number of users in manifest.json`);
+    }
   });
-}
+});

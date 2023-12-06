@@ -36,6 +36,5 @@ myMocha.describe(testName, function () {
       // console.log(backupData);
       assert(backupFileData === backupData, `users_chunk_${1}.json backup file contents do not match expected data`);
     }
-    
   });
 });

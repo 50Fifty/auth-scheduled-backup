@@ -2,7 +2,6 @@ import * as functions from "firebase-functions";
 import { StorageService } from "../services/interfaces/StorageService";
 import { AuthService } from "../services/interfaces/AuthService";
 import { Manifest } from "../files/manifest";
-import { saveOptions } from "../options/storage_options";
 
 /**
  * Asynchronously performs a backup of user data.
@@ -45,13 +44,28 @@ export async function performBackup(
     manifest.addFile(fileName, users.length);
     const manifestData = JSON.stringify(manifest.toJSON());
     // Update manifest.json before saving chunk
-    await storageService.saveFile(bucketName, folderName, Manifest.fileName, manifestData, saveOptions);
+    await storageService.saveFile({
+      bucketName: bucketName,
+      folderName: folderName,
+      fileName: Manifest.fileName, 
+      data: manifestData
+    });
     // Save chunk
-    await storageService.saveFile(bucketName, folderName, fileName, backupData, saveOptions);
+    await storageService.saveFile({
+      bucketName: bucketName,
+      folderName: folderName,
+      fileName: fileName,
+      data: backupData
+    });
     loggerInstance.log(`Users backup successfully saved to ${fileName}.`);
     index++;
   }
 
   const manifestData = JSON.stringify(manifest.toJSON({ completed: true }));
-  await storageService.saveFile(bucketName, folderName, Manifest.fileName, manifestData, saveOptions);
+  await storageService.saveFile({
+    bucketName: bucketName,
+    folderName: folderName,
+    fileName: Manifest.fileName,
+    data: manifestData
+  });
 }

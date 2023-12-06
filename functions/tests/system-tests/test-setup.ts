@@ -22,8 +22,13 @@ if (!process.env.CRON_SCHEDULE) {
   throw new Error('CRON_SCHEDULE not set in .env file.');
 }
 
-export const testEnv = {
+if (!process.env.PUBSUB_EMULATOR_ENDPOINT) {
+  console.warn('PUBSUB_EMULATOR_ENDPOINT not set in .env file. Tests involving Firebase emulator will be skipped.');
+}
+
+export const testEnvConfig = {
   PROJECT_ID: process.env.PROJECT_ID,
   BUCKET_NAME: process.env.BUCKET_NAME,
   CRON_SCHEDULE: process.env.CRON_SCHEDULE,
+  PUBSUB_EMULATOR_ENDPOINT: process.env.PUBSUB_EMULATOR_ENDPOINT
 };

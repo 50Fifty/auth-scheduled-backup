@@ -2,7 +2,7 @@ import { StorageService } from "../interfaces/StorageService";
 import * as fs from "fs";
 
 export class FakeStorageService implements StorageService {
-  async saveFile(bucketName: string, folderName: string, fileName: string, data: string): Promise<void> {
+  async saveFile({ bucketName, folderName, fileName, data }: { bucketName: string, folderName: string, fileName: string, data: string }): Promise<void> {
     fs.mkdirSync(`tests/unit-tests/results/${bucketName}/${folderName}`, { recursive: true });
     fs.writeFileSync(`tests/unit-tests/results/${bucketName}/${folderName}/${fileName}`, data);
   }
@@ -12,7 +12,7 @@ export class FakeStorageService implements StorageService {
     return Promise.resolve(fileContent);
   }
 
-  async deleteFolder(bucketName: string, folderName: string): Promise<void> {
+  async deleteFolder({ bucketName, folderName }: { bucketName: string, folderName: string }): Promise<void> {
     fs.rmdirSync(`tests/unit-tests/results/${bucketName}/${folderName}`, { recursive: true });
   }
 }
