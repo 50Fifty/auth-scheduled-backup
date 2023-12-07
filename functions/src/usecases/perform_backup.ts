@@ -38,6 +38,11 @@ export async function performBackup(
   let index = 1;
 
   for await (const users of authService.listAllUsers()) {
+    if (users.length === 0) {
+      loggerInstance.log("No users to backup.");
+      break;
+    }
+
     const backupData = JSON.stringify(users);
     const fileName = `users_chunk_${index}.json`;
 

@@ -9,7 +9,7 @@ import { logger } from "../../src/config";
 import * as admin from "firebase-admin";
 import { Manifest } from '../../src/files/manifest';
 
-const testName = "1. System Test: performBackup with live Firebase Auth"
+const testName = "3. System Test: performBackup with live Firebase Auth"
 
 myMocha.describe(testName, function () {
   this.timeout(10000);

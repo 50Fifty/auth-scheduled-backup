@@ -31,9 +31,6 @@ myMocha.describe(testName, function () {
       const fileName = `users_chunk_${1}.json`;
       const backupFileData = await fakeStorageService.getFile({ bucketName: fakeBucketName, folderName: fakeFolderName, fileName: fileName });
       assert(backupFileData !== undefined, `users_chunk_${1}.json backup file not found in ${fakeFolderName} folder in fake bucket`);
-      console.log(backupFileData);
-      console.log(backupData);
-      // console.log(backupData);
       assert(backupFileData === backupData, `users_chunk_${1}.json backup file contents do not match expected data`);
     }
   });

@@ -1,5 +1,3 @@
-import * as storage from "@google-cloud/storage";
-
 /**
  * Interface for storage services.
  * @interface
