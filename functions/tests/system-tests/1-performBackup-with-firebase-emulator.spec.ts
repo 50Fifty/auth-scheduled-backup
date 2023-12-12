@@ -1,18 +1,18 @@
 import * as myMocha from 'mocha';
 import * as admin from "firebase-admin";
 import { PubSub } from '@google-cloud/pubsub';
-import { testEnvConfig } from './test-setup';
+import { testEnvConfig, serviceAccountKeyFilePath } from '../test-setup';
 import { GoogleCloudStorageService } from '../../src/services/GoogleCloudStorageService';
 import { Manifest } from '../../src/files/manifest';
 import * as assert from 'assert';
 
-const testName = "2. System Test: performBackup with Firebase Emulator"
+const testName = "1. System Test: performBackup with Firebase Emulator"
 
 myMocha.describe(testName, function () {
   this.timeout(30000);
 
   myMocha.before(function () {
-    admin.initializeApp();
+    admin.initializeApp({credential: admin.credential.cert(serviceAccountKeyFilePath)});
   });
 
   myMocha.after(function () {

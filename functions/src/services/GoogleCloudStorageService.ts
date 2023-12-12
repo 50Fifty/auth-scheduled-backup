@@ -7,7 +7,7 @@ import * as storage from "@google-cloud/storage";
  */
 export class GoogleCloudStorageService implements StorageService {
   /** @private @type {string} - Name of the manifest file. */
-  static readonly fileName = "manifest.json";
+  static readonly fileName: string = "manifest.json";
 
   /** @private @type {storage.SaveOptions} - Save options for the file. */
   private saveOptions: storage.SaveOptions = {
@@ -24,11 +24,12 @@ export class GoogleCloudStorageService implements StorageService {
    * Save a file to a specified Google Cloud Storage bucket.
    *
    * @async
-   * @param {string} bucketName - Name of the bucket to save the file to.
-   * @param {string} folderName - Name of the folder to save the file to.
-   * @param {string} fileName - Name of the file to be saved.
-   * @param {string} data - Data content of the file.
-   * @param {storage.SaveOptions} saveOptions - Save options for the file.
+   * @param {object} params - Parameters for saving the file.
+   * @param {string} params.bucketName - Name of the bucket to save the file to.
+   * @param {string} params.folderName - Name of the folder to save the file to.
+   * @param {string} params.fileName - Name of the file to be saved.
+   * @param {string} params.data - Data content of the file.
+   * @param {storage.SaveOptions} params.saveOptions - Save options for the file.
    * @throws {Error} Throws an error if saving the file fails.
    * @return {Promise<void>}
    */

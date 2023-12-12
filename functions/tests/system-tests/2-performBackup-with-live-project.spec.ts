@@ -4,12 +4,12 @@ import * as functionsTest from 'firebase-functions-test';
 import { performBackup } from '../../src/usecases/perform_backup';
 import { GoogleCloudStorageService } from "../../src/services/GoogleCloudStorageService";
 import { FirebaseAuthService } from "../../src/services/FirebaseAuthService";
-import { serviceAccountKeyExists, serviceAccountKeyFilePath, testEnvConfig } from './test-setup';
+import { serviceAccountKeyExists, serviceAccountKeyFilePath, testEnvConfig } from '../test-setup';
 import { logger } from "../../src/config";
 import * as admin from "firebase-admin";
 import { Manifest } from '../../src/files/manifest';
 
-const testName = "3. System Test: performBackup with live Firebase Auth"
+const testName = "2. System Test: performBackup with live Firebase Auth"
 
 myMocha.describe(testName, function () {
   this.timeout(10000);
@@ -23,7 +23,7 @@ myMocha.describe(testName, function () {
 
   // Before live test, we'll initialize the app
   myMocha.before(function () {
-    admin.initializeApp();
+    admin.initializeApp({credential: admin.credential.cert(serviceAccountKeyFilePath)});
   });
 
   // After live test, we'll clean up resources we set up for testing purposes
