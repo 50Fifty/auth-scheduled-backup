@@ -107,6 +107,9 @@ To develop this extension locally, you first need to [set up a Firebase project]
     `firebase deploy --only extensions`
 
 ## Testing
+
+Setting up of Google's Application Default Credentials (ADC) is required for running tests. This can be done by running `gcloud auth application-default login` and following the instructions. This is required to read and write to Google Cloud Storage.
+
 ### System Tests
 To run the system tests, you first need to [set up a Firebase project](https://firebase.google.com/docs/projects/learn-more) and [install the Firebase CLI](https://firebase.google.com/docs/cli#install_the_firebase_cli).
 

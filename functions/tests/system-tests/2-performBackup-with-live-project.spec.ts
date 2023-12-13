@@ -4,7 +4,7 @@ import * as functionsTest from 'firebase-functions-test';
 import { performBackup } from '../../src/usecases/perform_backup';
 import { GoogleCloudStorageService } from "../../src/services/GoogleCloudStorageService";
 import { FirebaseAuthService } from "../../src/services/FirebaseAuthService";
-import { serviceAccountKeyExists, serviceAccountKeyFilePath, testEnvConfig } from '../test-setup';
+import { serviceAccountKeyExists, serviceAccountKeyFilePath, testEnvConfig } from '../configs/test-setup';
 import { logger } from "../../src/config";
 import * as admin from "firebase-admin";
 import { Manifest } from '../../src/files/manifest';
@@ -13,13 +13,12 @@ const testName = "2. System Test: performBackup with live Firebase Auth"
 
 myMocha.describe(testName, function () {
   this.timeout(10000);
+  const myTest = functionsTest({ // need this to initialize GoogleCloudStorageService with privileged credentials
+    projectId: testEnvConfig.PROJECT_ID,
+  }, serviceAccountKeyFilePath);
+
   const googleCloudStorageService = new GoogleCloudStorageService();
   const folderName = new Date().toISOString().split('T')[0];
-
-  const myTest = functionsTest({
-    projectId: testEnvConfig.PROJECT_ID,
-    databaseURL: `https://${testEnvConfig.PROJECT_ID}.firebaseio.com`,
-  }, serviceAccountKeyFilePath);
 
   // Before live test, we'll initialize the app
   myMocha.before(function () {

@@ -1,7 +1,7 @@
 import * as myMocha from 'mocha';
 import * as admin from "firebase-admin";
 import { PubSub } from '@google-cloud/pubsub';
-import { testEnvConfig, serviceAccountKeyFilePath } from '../test-setup';
+import { testEnvConfig, serviceAccountKeyFilePath } from '../configs/test-setup';
 import { GoogleCloudStorageService } from '../../src/services/GoogleCloudStorageService';
 import { Manifest } from '../../src/files/manifest';
 import * as assert from 'assert';

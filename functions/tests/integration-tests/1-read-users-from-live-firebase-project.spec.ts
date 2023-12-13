@@ -1,6 +1,6 @@
 import * as myMocha from 'mocha';
 import * as admin from "firebase-admin";
-import { serviceAccountKeyFilePath } from '../test-setup';
+import { serviceAccountKeyFilePath } from '../configs/test-setup';
 
 const testName = "1. Integration Test: read users from live Firebase project";
 
