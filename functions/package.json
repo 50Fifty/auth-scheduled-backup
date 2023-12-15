@@ -18,6 +18,7 @@
     "firebase-functions": "^4.2.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.3.1",
     "@types/babel__core": "^7.20.5",
     "@types/chai": "^4.3.4",
     "@types/mocha": "^10.0.3",

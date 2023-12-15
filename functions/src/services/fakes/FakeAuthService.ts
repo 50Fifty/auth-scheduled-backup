@@ -3,9 +3,15 @@ import { AuthService } from "../interfaces/AuthService";
 import * as fs from "fs";
 
 export class FakeAuthService implements AuthService {
-  private users: UserRecord[] = mock_users;
+  private users: UserRecord[];
 
-  async *listAllUsers({ perBatchCount = 10000}: { perBatchCount?: number} = {}): AsyncGenerator<UserRecord[]> {
+  constructor({ large = false }: { large?: boolean } = {}) {
+    large ? 
+      this.users = JSON.parse(fs.readFileSync('src/services/fakes/mock_auth_data_large.json', 'utf8')) : 
+      this.users = JSON.parse(fs.readFileSync('src/services/fakes/mock_auth_data.json', 'utf8'));
+  }
+
+  async *listAllUsers({ perBatchCount = 10000 }: { perBatchCount?: number } = {}): AsyncGenerator<UserRecord[]> {
     let count = 0;
 
     while (count < this.users.length) {
@@ -14,8 +20,6 @@ export class FakeAuthService implements AuthService {
     }
   }
 }
-
-const mock_users = JSON.parse(fs.readFileSync('src/services/fakes/mock_auth_data_large.json', 'utf8'));
 
 // const mock_users = [
 //   {
