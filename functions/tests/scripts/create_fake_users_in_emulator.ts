@@ -8,11 +8,9 @@ admin.initializeApp({ credential: admin.credential.cert(serviceAccountKeyFilePat
 
 const auth = admin.auth();
 
-const numberOfUsers = 1000;
-
 auth.importUsers
 
-async function createFakeUsers() {
+async function createFakeUsers(numberOfUsers: number = 1000) {
   let count = 0;
   for (let i = 0; i < numberOfUsers; i++) {
 
@@ -29,7 +27,7 @@ async function createFakeUsers() {
     } catch (error) {
       console.error(`Error creating user: ${error}`);
     } finally {
-      console.log(`User created`);
+      console.log(`User ${displayName} created`);
       count++;
     }
   }

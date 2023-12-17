@@ -108,7 +108,22 @@ To develop this extension locally, you first need to [set up a Firebase project]
 
 ## Testing
 
-Setting up of Google's Application Default Credentials (ADC) is required for running tests. This can be done by running `gcloud auth application-default login` and following the instructions. This is required to read and write to Google Cloud Storage.
+All tests are written with [Mocha](https://mochajs.org/).
+
+### Unit Tests
+The unit tests target the performBackup function in `functions/src/index.ts`.
+
+Unit tests can be run locally. It uses fake data and mocks to simulate the Firebase Authentication and Cloud Storage services.
+
+To run the unit tests, run the following command:
+1. `npm run test:unit`
+
+### Integration Tests
+To run the integration tests, you first need to [set up a Firebase project](https://firebase.google.com/docs/projects/learn-more) and [install the Firebase CLI](https://firebase.google.com/docs/cli#install_the_firebase_cli).
+The integration tests are created to test connections to external services such as Firebase Authentication and Cloud Storage.
+
+To run the integration tests, run the following command:
+1. `npm run test:integration`
 
 ### System Tests
 To run the system tests, you first need to [set up a Firebase project](https://firebase.google.com/docs/projects/learn-more) and [install the Firebase CLI](https://firebase.google.com/docs/cli#install_the_firebase_cli).
