@@ -38,7 +38,7 @@ myMocha.describe(testName, function () {
     }
     console.log(`Message published to ${SCHEDULED_FUNCTION_TOPIC} topic`);
   
-    // Wait for scheduled function to run
+    // Wait for scheduled function to run, TODO: find a better way to do this
     await new Promise(resolve => setTimeout(resolve, 10000));
 
     const googleCloudStorageService = new GoogleCloudStorageService();

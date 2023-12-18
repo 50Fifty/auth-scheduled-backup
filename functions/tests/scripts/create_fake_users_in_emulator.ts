@@ -8,8 +8,6 @@ admin.initializeApp({ credential: admin.credential.cert(serviceAccountKeyFilePat
 
 const auth = admin.auth();
 
-auth.importUsers
-
 async function createFakeUsers(numberOfUsers: number = 1000) {
   let count = 0;
   for (let i = 0; i < numberOfUsers; i++) {

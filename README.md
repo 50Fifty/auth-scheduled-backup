@@ -139,6 +139,10 @@ To run the system tests, you first need to [set up a Firebase project](https://f
 
 2. Optional: Download a service account key for the Firebase project you want to test with and save it as `functions/tests/configs/serviceAccountKey.json`. This is required if you want to test the extension with a live Firebase project in addition to using the fakes.
 
+3. Optional: Start the Firebase Emulator Suite. This is required if you want to run the tests that use the Firebase Emulator Suite.
+
+    `firebase emulators:start`
+
 3. Run the system tests:
     `npm run test:system`
 
