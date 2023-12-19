@@ -57,6 +57,7 @@ jobs:
           curl -sL https://firebase.tools | bash
 
       - name: Start Firebase Emulator and run system tests
+        shell: bash
         env:
           BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
           CRON_SCHEDULE: ${{ secrets.CRON_SCHEDULE }}
