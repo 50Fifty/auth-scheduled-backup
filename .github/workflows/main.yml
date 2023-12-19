@@ -1,4 +1,4 @@
-name: Run integration tests
+name: Run unit and integration tests
 
 on:  
   push:
@@ -41,4 +41,5 @@ jobs:
           PROJECT_ID: ${{ secrets.PROJECT_ID }}
         run: |
           cd functions
-          npm run test:system
+          npm run test:unit
+          npm run test:integration
