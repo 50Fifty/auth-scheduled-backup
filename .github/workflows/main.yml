@@ -63,5 +63,5 @@ jobs:
           PROJECT_ID: ${{ secrets.PROJECT_ID }}
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: |
-          firebase use $PROJECT_ID --token $FIREBASE_TOKEN
-          firebase emulators:exec "cd functions && npm run test:system"
+          cd functions/tests/system
+          firebase emulators:exec --project $PROJECT_ID "npm run test:system"

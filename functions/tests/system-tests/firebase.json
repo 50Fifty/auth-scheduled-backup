@@ -16,6 +16,6 @@
   },
   "extensions": {},
   "functions": {
-    "source": "functions"
+    "source": "../../../functions"
   }
 }
