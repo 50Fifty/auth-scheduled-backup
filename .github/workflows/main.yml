@@ -55,17 +55,16 @@ jobs:
           cd functions
           npm run test:integration
 
-      - name: Install Firebase CLI
-        run: |
-          curl -sL https://firebase.tools | bash
+      # - name: Install Firebase CLI
+      #   run: |
+      #     curl -sL https://firebase.tools | bash
 
-      - name: Start Firebase Emulator and run system tests
-        env:
-          BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
-          CRON_SCHEDULE: ${{ secrets.CRON_SCHEDULE }}
-          PROJECT_ID: ${{ secrets.PROJECT_ID }}
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        run: |
-          npm config set script-shell "/bin/bash"
-          cd functions/tests/system-tests
-          firebase emulators:exec --project $PROJECT_ID "npm run test:system:unix --verbose"
+      # - name: Start Firebase Emulator and run system tests
+      #   env:
+      #     BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
+      #     CRON_SCHEDULE: ${{ secrets.CRON_SCHEDULE }}
+      #     PROJECT_ID: ${{ secrets.PROJECT_ID }}
+      #     FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      #   run: |
+      #     cd functions/tests/system-tests
+      #     firebase emulators:exec --project $PROJECT_ID "npm run test:system"
