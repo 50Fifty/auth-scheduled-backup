@@ -1,6 +1,7 @@
 import * as myMocha from 'mocha';
 import * as admin from "firebase-admin";
 import { serviceAccountKeyFilePath } from '../configs/test-setup';
+import * as assert from 'assert';
 
 const testName = "1. Integration Test: read users from live Firebase project";
 
@@ -17,5 +18,6 @@ myMocha.describe(testName, function () {
 
   myMocha.it('Should be able to read users from live Firebase project', async function () {
     const users = await admin.auth().listUsers();
+    assert(users !== undefined, 'listUsers() returned undefined');
   });
 });
