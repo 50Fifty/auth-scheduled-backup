@@ -53,5 +53,5 @@ jobs:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: |
           curl -sL https://firebase.tools | bash
-          firebase emulators:exec "cd functions && npm run test:system" --project $PROJECT_ID 
+          firebase emulators:exec --project $PROJECT_ID "cd functions && npm run test:system" 
         shell: bash
