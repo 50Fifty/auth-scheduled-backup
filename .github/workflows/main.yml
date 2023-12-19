@@ -39,7 +39,6 @@ jobs:
           BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
           CRON_SCHEDULE: ${{ secrets.CRON_SCHEDULE }}
           PROJECT_ID: ${{ secrets.PROJECT_ID }}
-          PUBSUB_EMULATOR_ENDPOINT: ${{ secrets.PUBSUB_EMULATOR_ENDPOINT }}
         run: |
           cd functions
           npm run test:unit
@@ -49,9 +48,6 @@ jobs:
           BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
           CRON_SCHEDULE: ${{ secrets.CRON_SCHEDULE }}
           PROJECT_ID: ${{ secrets.PROJECT_ID }}
-          PUBSUB_EMULATOR_ENDPOINT: ${{ secrets.PUBSUB_EMULATOR_ENDPOINT }}
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: |
-          curl -sL https://firebase.tools | bash
-          firebase emulators:exec --project $PROJECT_ID "cd functions && npm run test:system" 
-        shell: bash
+          cd functions
+          npm run test:integration
