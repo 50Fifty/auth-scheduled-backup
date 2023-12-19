@@ -34,7 +34,7 @@ jobs:
           SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
         run: echo $SERVICE_ACCOUNT_KEY | base64 -di > ./functions/tests/configs/serviceAccountKey.json
         
-      - name: Run tests
+      - name: Run unit and integration tests
         env:
           BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
           CRON_SCHEDULE: ${{ secrets.CRON_SCHEDULE }}

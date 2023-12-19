@@ -17,6 +17,5 @@ myMocha.describe(testName, function () {
 
   myMocha.it('Should be able to read users from live Firebase project', async function () {
     const users = await admin.auth().listUsers();
-    console.log(users);
   });
 });
