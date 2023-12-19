@@ -54,3 +54,4 @@ jobs:
         run: |
           curl -sL https://firebase.tools | bash
           firebase emulators:exec --project $PROJECT_ID "cd functions && npm run test:system"
+        shell: bash
