@@ -39,7 +39,9 @@ jobs:
           BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
           CRON_SCHEDULE: ${{ secrets.CRON_SCHEDULE }}
           PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          PUBSUB_EMULATOR_ENDPOINT: ${{ secrets.PUBSUB_EMULATOR_ENDPOINT }}
         run: |
+          firebase emulators:start
           cd functions
           npm run test:unit
           npm run test:integration
