@@ -61,5 +61,7 @@ jobs:
           BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
           CRON_SCHEDULE: ${{ secrets.CRON_SCHEDULE }}
           PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: |
+          firebase use $PROJECT_ID --token $FIREBASE_TOKEN
           firebase emulators:exec "cd functions && npm run test:system"
