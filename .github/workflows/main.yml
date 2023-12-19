@@ -66,5 +66,6 @@ jobs:
           PROJECT_ID: ${{ secrets.PROJECT_ID }}
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: |
+          npm config set script-shell "/bin/bash"
           cd functions/tests/system-tests
           firebase emulators:exec --project $PROJECT_ID "npm run test:system:unix --verbose"
