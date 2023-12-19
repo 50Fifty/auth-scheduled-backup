@@ -52,4 +52,4 @@ jobs:
           PUBSUB_EMULATOR_ENDPOINT: ${{ secrets.PUBSUB_EMULATOR_ENDPOINT }}
         run: |
           curl -sL https://firebase.tools | bash
-          firebase emulators:exec \"cd functions && npm run test:system --exit\"
+          firebase emulators:exec \"cd functions && npm run test:system\"
