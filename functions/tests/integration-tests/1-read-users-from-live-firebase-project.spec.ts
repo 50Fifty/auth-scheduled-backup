@@ -11,8 +11,8 @@ myMocha.describe(testName, function () {
     admin.initializeApp({credential: admin.credential.cert(serviceAccountKeyFilePath)});
   }); 
 
-  myMocha.after(function () {
-    admin.app().delete();
+  myMocha.after(async function () {
+    await admin.app().delete();
   });
 
   myMocha.it('Should be able to read users from live Firebase project', async function () {

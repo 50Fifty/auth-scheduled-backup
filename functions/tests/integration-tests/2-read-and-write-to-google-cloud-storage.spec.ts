@@ -20,9 +20,9 @@ myMocha.describe(testName, function () {
     admin.initializeApp({ credential: admin.credential.cert(serviceAccountKeyFilePath) });
   });
 
-  myMocha.after(function () {
+  myMocha.after(async function () {
     googleCloudStorageService.deleteFolder({ bucketName: testEnvConfig.BUCKET_NAME, folderName: folderName });
-    admin.app().delete();
+    await admin.app().delete();
     myTest.cleanup();
   });
 

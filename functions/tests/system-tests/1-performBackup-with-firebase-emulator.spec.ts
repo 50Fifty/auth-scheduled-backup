@@ -11,12 +11,16 @@ const testName = "1. System Test: performBackup with Firebase Emulator"
 myMocha.describe(testName, function () {
   this.timeout(30000);
 
+  const googleCloudStorageService = new GoogleCloudStorageService();
+  const folderName = new Date().toISOString().split('T')[0];
+
   myMocha.before(function () {
     admin.initializeApp({credential: admin.credential.cert(serviceAccountKeyFilePath)});
   });
 
-  myMocha.after(function () {
-    admin.app().delete();
+  myMocha.after(async function () {
+    await googleCloudStorageService.deleteFolder({ bucketName: testEnvConfig.BUCKET_NAME, folderName: folderName });
+    await admin.app().delete();
   });
 
   myMocha.it('Should save users to GCS bucket', async function () {
@@ -40,9 +44,6 @@ myMocha.describe(testName, function () {
   
     // Wait for scheduled function to run, TODO: find a better way to do this
     await new Promise(resolve => setTimeout(resolve, 10000));
-
-    const googleCloudStorageService = new GoogleCloudStorageService();
-    const folderName = new Date().toISOString().split('T')[0];
 
     let manifestData: string;
 

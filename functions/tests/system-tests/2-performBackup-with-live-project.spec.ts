@@ -26,9 +26,9 @@ myMocha.describe(testName, function () {
   });
 
   // After live test, we'll clean up resources we set up for testing purposes
-  myMocha.after(function () {
-    googleCloudStorageService.deleteFolder({ bucketName: testEnvConfig.BUCKET_NAME, folderName: folderName });
-    admin.app().delete();
+  myMocha.after(async function () {
+    await googleCloudStorageService.deleteFolder({ bucketName: testEnvConfig.BUCKET_NAME, folderName: folderName });
+    await admin.app().delete();
     myTest.cleanup();
   });
 
