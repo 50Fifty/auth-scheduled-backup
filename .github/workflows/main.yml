@@ -51,5 +51,5 @@ jobs:
           PROJECT_ID: ${{ secrets.PROJECT_ID }}
           PUBSUB_EMULATOR_ENDPOINT: ${{ secrets.PUBSUB_EMULATOR_ENDPOINT }}
         run: |
-          npm install -g firebase-tools
+          curl -sL https://firebase.tools | bash
           firebase emulators:exec \"cd functions && npm run test:system --exit\"
