@@ -7,8 +7,7 @@
     "build:watch": "tsc --watch",
     "test:unit": "mocha -r ts-node/register tests/unit-tests/**/*.spec.ts",
     "test:integration": "mocha -r ts-node/register tests/integration-tests/**/*.spec.ts",
-    "test:system": "if [ \"$OS\" = \"Windows_NT\" ]; then npm run test:system:win; else npm run test:system:unix; fi",
-    "test:system:win": "mocha -r ts-node/register tests/system-tests/**/*.spec.ts",
+    "test:system": "mocha -r ts-node/register tests/system-tests/**/*.spec.ts",
     "test:system:unix": "bash -c 'mocha -r ts-node/register tests/system-tests/**/*.spec.ts'"
   },
   "main": "lib/index.js",
