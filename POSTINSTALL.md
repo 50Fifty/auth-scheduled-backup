@@ -12,6 +12,8 @@ https://firebase.google.com/docs/extensions/publishers/user-documentation#writin
 
 # See it in action
 
+At the configured time, the extension will create a backup of your Firebase Authentication users and store it in the specified Cloud Storage bucket.
+
 # Using the extension
 
 This extension runs automatically based on your configured schedule. There is no need for manual intervention after setup. Backups are created and stored in the specified Cloud Storage bucket.

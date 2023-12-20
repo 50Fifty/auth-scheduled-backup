@@ -20,3 +20,6 @@ functions/node_modules/
 
 # results of unit tests
 functions/tests/unit-tests/results
+
+# extensions folder
+extensions/
