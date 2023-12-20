@@ -16,9 +16,7 @@
 This extension simplifies the process of regularly backing up Firebase Authentication users' data. By automatically creating backups at a specified interval, this extension provides an extra layer of security and ensures data recoverability for your Firebase project.
 
 ## Details
-This extension regularly backs up user data from Firebase Authentication. It captures user details such as unique identifiers (UIDs), email addresses, custom claims, and more. These backups can be vital for disaster recovery, auditing, and analysis purposes.
-
-The extension provides customizable scheduling options, allowing you to define how often the backup process occurs. You can configure it to run daily, weekly, or at other intervals that suit your project's needs.
+This extension regularly backs up user data from Firebase Authentication. It captures user details such as unique identifiers (UIDs), email addresses, custom claims, and more. These backups can be vital for disaster recovery, auditing, and analysis purposes. The backups are in JSON format and are stored in a Google Cloud Storage bucket. You can configure the extension to run at a specified interval, such as daily or weekly. The backups can be easily imported into a Firebase project using the Firebase Admin SDK.
 
 ## Setup
 
@@ -28,29 +26,21 @@ The extension provides customizable scheduling options, allowing you to define h
 
 To install this extension, you first need to [set up a Firebase project](https://firebase.google.com/docs/projects/learn-more) and [install the Firebase CLI](https://firebase.google.com/docs/cli#install_the_firebase_cli).
 
-1. Create a new directory for your Firebase project (the project that you want to add the extension to):
-
-    `mkdir ~/<your_project_name> && cd ~/<your_project_name>`
-
-2. Initialize a Firebase project in the working directory:
-
-    `firebase init`
-
-3. When prompted, select the project you want to deploy the extension to.
-
-4. Clone this repository:
+1. Clone this repository:
 
     `git clone https://github.com/50Fifty/backup-firebase-auth`
 
-5. Install dependencies:
+2. Navigate to the `functions` folder and install dependencies:
 
+    `cd functions`
     `npm install`
 
-6. Install the extension into your local Firebase project:
+3. Navigate back to the `backup-firebase-auth` folder and install the extension into your local Firebase project (you will be prompted to select a project during installation):
 
-    `firebase ext:install /path/to/backup-firebase-auth`
+    `cd ..`
+    `firebase ext:install .`
 
-7. Deploy your extension configuration to your live project:
+4. Deploy your extension configuration to your live project:
 
     `firebase deploy --only extensions`
 
@@ -72,39 +62,6 @@ The extension requires appropriate IAM roles to access and manage resources in y
 
 ## Contributing
 Contributions to this extension are welcome! Feel free to submit issues, feature requests, or pull requests to enhance its functionality. See the [CONTRIBUTING](CONTRIBUTING.md) guide for more information.
-
-## Development
-To develop this extension locally, you first need to [set up a Firebase project](https://firebase.google.com/docs/projects/learn-more) and [install the Firebase CLI](https://firebase.google.com/docs/cli#install_the_firebase_cli).
-
-1. Create a new directory for your Firebase project (the project that you want to add the extension to):
-
-    `mkdir ~/<your_project_name> && cd ~/<your_project_name>`
-
-2. Initialize a new or existing Firebase project in the working directory:
-
-    `firebase init`
-
-3. When prompted, select the project you want to deploy the extension to.
-
-4. Clone this repository:
-
-    `git clone https://github.com/50Fifty/backup-firebase-auth`
-
-5. Install dependencies:
-
-    `npm install`
-
-6. Build the extension:
-
-    `npm run build`
-
-7. Run the extension locally:
-
-    `firebase serve --only functions`
-
-8. Deploy your extension configuration to your live project:
-
-    `firebase deploy --only extensions`
 
 ## Testing
 
@@ -139,7 +96,7 @@ To run the system tests, you first need to [set up a Firebase project](https://f
 
 2. Optional: Download a service account key for the Firebase project you want to test with and save it as `functions/tests/configs/serviceAccountKey.json`. This is required if you want to test the extension with a live Firebase project in addition to using the fakes.
 
-3. Optional: Start the Firebase Emulator Suite. This is required if you want to run the tests that use the Firebase Emulator Suite.
+3. Optional: Start the Firebase Emulator Suite by running the below command in the `backup-firebase-auth` directory. This is required if you want to run the tests that use the Firebase Emulator Suite.
 
     `firebase emulators:start`
 

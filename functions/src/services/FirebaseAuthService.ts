@@ -25,44 +25,6 @@ export class FirebaseAuthService implements AuthService {
     this.auth = auth;
   }
 
-  // /**
-  //  * Lists all users in the authentication system, fetching them in batches of up to 1000 at a time.
-  //  *
-  //  * @return {Promise<UserRecord[]>} - An array of `UserRecord` objects representing the users.
-  //  * @async
-  //  */
-  // async listAllUsers(): Promise<UserRecord[]> {
-  //   const users: UserRecord[] = [];
-  //   let nextPageToken: string | undefined = undefined;
-
-  //   do {
-  //     const listUsersResult: ListUsersResult = await this.auth.listUsers(1000, nextPageToken);
-  //     users.push(...listUsersResult.users);
-  //     nextPageToken = listUsersResult.pageToken;
-  //   } while (nextPageToken);
-
-  //   return users;
-  // }
-
-  // async *listAllUsers(): AsyncGenerator<UserRecord[]> {
-  //   let nextPageToken: string | undefined = undefined;
-  //   let curr_users: UserRecord[] = [];
-
-  //   do {
-  //     const listUsersResult: ListUsersResult = await this.auth.listUsers(1000, nextPageToken);
-  //     curr_users.push(...listUsersResult.users);
-  //     nextPageToken = listUsersResult.pageToken;
-  //     if (curr_users.length >= 10000) {
-  //       yield curr_users;
-  //       curr_users = [];
-  //     }
-  //   } while (nextPageToken);
-
-  //   if (curr_users.length > 0) {
-  //     yield curr_users;
-  //   }
-  // }
-
   /**
    * Asynchronously generates batches of user records. Each batch can contain up to `perBatchCount` users.
    * 
