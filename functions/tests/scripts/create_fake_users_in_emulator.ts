@@ -2,7 +2,7 @@ import * as admin from 'firebase-admin';
 import { faker } from '@faker-js/faker'
 import { serviceAccountKeyFilePath } from '../configs/test-setup';
 
-// process.env.FIREBASE_AUTH_EMULATOR_HOST = '127.0.0.1:9099';
+process.env.FIREBASE_AUTH_EMULATOR_HOST = '127.0.0.1:9099';
 
 admin.initializeApp({ credential: admin.credential.cert(serviceAccountKeyFilePath) });
 
@@ -14,7 +14,7 @@ async function createFakeUsers(numberOfUsers: number = 5000) {
 
     const displayName = faker.person.fullName();
 
-    auth.createUser({
+    await auth.createUser({
       email: faker.internet.email(),
       emailVerified: faker.datatype.boolean(),
       password: faker.internet.password(),
