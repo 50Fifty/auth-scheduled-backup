@@ -33,14 +33,16 @@ To install this extension, you first need to [set up a Firebase project](https:/
 2. Navigate to the `functions` folder and install dependencies:
 
     `cd functions`
+   
     `npm install`
 
-3. Navigate back to the `backup-firebase-auth` folder and install the extension into your local Firebase project (you will be prompted to select a project during installation):
+4. Navigate back to the `backup-firebase-auth` folder and install the extension into your local Firebase project (you will be prompted to select a project during installation):
 
     `cd ..`
+   
     `firebase ext:install .`
 
-4. Deploy your extension configuration to your live project:
+6. Deploy your extension configuration to your live project:
 
     `firebase deploy --only extensions`
 
@@ -73,14 +75,16 @@ The unit tests target the performBackup function in `functions/src/index.ts`.
 Unit tests can be run locally. It uses fake data and mocks to simulate the Firebase Authentication and Cloud Storage services.
 
 To run the unit tests, run the following command:
-1. `npm run test:unit`
+
+`npm run test:unit`
 
 ### Integration Tests
 To run the integration tests, you first need to [set up a Firebase project](https://firebase.google.com/docs/projects/learn-more) and [install the Firebase CLI](https://firebase.google.com/docs/cli#install_the_firebase_cli).
 The integration tests are created to test connections to external services such as Firebase Authentication and Cloud Storage.
 
 To run the integration tests, run the following command:
-1. `npm run test:integration`
+
+`npm run test:integration`
 
 ### System Tests
 To run the system tests, you first need to [set up a Firebase project](https://firebase.google.com/docs/projects/learn-more) and [install the Firebase CLI](https://firebase.google.com/docs/cli#install_the_firebase_cli).
@@ -101,6 +105,7 @@ To run the system tests, you first need to [set up a Firebase project](https://f
     `firebase emulators:start`
 
 3. Run the system tests:
+   
     `npm run test:system`
 
 ## License
