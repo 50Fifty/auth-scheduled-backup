@@ -1,5 +1,5 @@
 # backup-firebase-auth
-> An Extension for Firebase that automatically backs up Firebase Authentication users' data to a Google Cloud Storage bucket on a predefined schedule.
+> Firebase Extension for any Firebase project that automatically backs up the Authentication users' data to a Google Cloud Storage bucket on a predefined schedule.
 
 ![GitHub](https://img.shields.io/github/license/50Fifty/backup-firebase-auth) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/50Fifty/backup-firebase-auth) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/50Fifty/backup-firebase-auth/CI) ![GitHub issues](https://img.shields.io/github/issues/50Fifty/backup-firebase-auth) ![GitHub pull requests](https://img.shields.io/github/issues-pr/50Fifty/backup-firebase-auth) ![GitHub contributors](https://img.shields.io/github/contributors/50Fifty/backup-firebase-auth) ![GitHub last commit](https://img.shields.io/github/last-commit/50Fifty/backup-firebase-auth) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/50Fifty/backup-firebase-auth) ![GitHub All Releases](https://img.shields.io/github/downloads/50Fifty/backup-firebase-auth/total)
 
@@ -107,21 +107,44 @@ To develop this extension locally, you first need to [set up a Firebase project]
     `firebase deploy --only extensions`
 
 ## Testing
+
+All tests are written with [Mocha](https://mochajs.org/).
+
+### Unit Tests
+The unit tests target the performBackup function in `functions/src/index.ts`.
+
+Unit tests can be run locally. It uses fake data and mocks to simulate the Firebase Authentication and Cloud Storage services.
+
+To run the unit tests, run the following command:
+1. `npm run test:unit`
+
 ### Integration Tests
 To run the integration tests, you first need to [set up a Firebase project](https://firebase.google.com/docs/projects/learn-more) and [install the Firebase CLI](https://firebase.google.com/docs/cli#install_the_firebase_cli).
+The integration tests are created to test connections to external services such as Firebase Authentication and Cloud Storage.
 
-1. Create a .env file in functions/integration-tests/extensions with the following contents:
+To run the integration tests, run the following command:
+1. `npm run test:integration`
+
+### System Tests
+To run the system tests, you first need to [set up a Firebase project](https://firebase.google.com/docs/projects/learn-more) and [install the Firebase CLI](https://firebase.google.com/docs/cli#install_the_firebase_cli).
+
+1. Create a `.env` file in `functions/tests/system-tests/configs` with the following contents:
 
     ```
     PROJECT_ID="<project id>" # Optional: Project ID of the Firebase project to test with, if you want to test with a live project
     BUCKET_NAME="<bucket name>"
     CRON_SCHEDULE="<cron schedule>"
     ```
-    
-2. Optional: Download a service account key for the Firebase project you want to test with and save it as `functions/integration-tests/extensions/serviceAccountKey.json`. This is required if you want to test the extension with a live Firebase project in addition to using the mocks.
+    You can refer to the `sample.env` file in the same folder for an example.
 
-3. Run the integration tests:
-    `npm run test`
+2. Optional: Download a service account key for the Firebase project you want to test with and save it as `functions/tests/configs/serviceAccountKey.json`. This is required if you want to test the extension with a live Firebase project in addition to using the fakes.
+
+3. Optional: Start the Firebase Emulator Suite. This is required if you want to run the tests that use the Firebase Emulator Suite.
+
+    `firebase emulators:start`
+
+3. Run the system tests:
+    `npm run test:system`
 
 ## License
 This project is licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for more information.

@@ -17,3 +17,6 @@ functions/node_modules/
 
 # .env files
 .env
+
+# results of unit tests
+functions/tests/unit-tests/results
