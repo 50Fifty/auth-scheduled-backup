@@ -1,9 +1,9 @@
-# backup-firebase-auth
+# auth-scheduled-backup
 > Firebase Extension for any Firebase project that automatically backs up the Authentication users' data to a Google Cloud Storage bucket on a predefined schedule.
 
-![GitHub](https://img.shields.io/github/license/50Fifty/backup-firebase-auth) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/50Fifty/backup-firebase-auth) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/50Fifty/backup-firebase-auth/CI) ![GitHub issues](https://img.shields.io/github/issues/50Fifty/backup-firebase-auth) ![GitHub pull requests](https://img.shields.io/github/issues-pr/50Fifty/backup-firebase-auth) ![GitHub contributors](https://img.shields.io/github/contributors/50Fifty/backup-firebase-auth) ![GitHub last commit](https://img.shields.io/github/last-commit/50Fifty/backup-firebase-auth) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/50Fifty/backup-firebase-auth) ![GitHub All Releases](https://img.shields.io/github/downloads/50Fifty/backup-firebase-auth/total)
+![GitHub](https://img.shields.io/github/license/50Fifty/auth-scheduled-backup) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/50Fifty/auth-scheduled-backup) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/50Fifty/auth-scheduled-backup/CI) ![GitHub issues](https://img.shields.io/github/issues/50Fifty/auth-scheduled-backup) ![GitHub pull requests](https://img.shields.io/github/issues-pr/50Fifty/auth-scheduled-backup) ![GitHub contributors](https://img.shields.io/github/contributors/50Fifty/auth-scheduled-backup) ![GitHub last commit](https://img.shields.io/github/last-commit/50Fifty/auth-scheduled-backup) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/50Fifty/auth-scheduled-backup) ![GitHub All Releases](https://img.shields.io/github/downloads/50Fifty/auth-scheduled-backup/total)
 
-![GitHub stars](https://img.shields.io/github/stars/50Fifty/backup-firebase-auth?style=social) ![GitHub forks](https://img.shields.io/github/forks/50Fifty/backup-firebase-auth?style=social) ![GitHub watchers](https://img.shields.io/github/watchers/50Fifty/backup-firebase-auth?style=social)
+![GitHub stars](https://img.shields.io/github/stars/50Fifty/auth-scheduled-backup?style=social) ![GitHub forks](https://img.shields.io/github/forks/50Fifty/auth-scheduled-backup?style=social) ![GitHub watchers](https://img.shields.io/github/watchers/50Fifty/auth-scheduled-backup?style=social)
 
 > [!WARNING]\
 > This project is currently under development and may contain bugs or incomplete features. Use it at your own risk. 
@@ -28,7 +28,7 @@ To install this extension, you first need to [set up a Firebase project](https:/
 
 1. Clone this repository:
 
-    `git clone https://github.com/50Fifty/backup-firebase-auth`
+    `git clone https://github.com/50Fifty/auth-scheduled-backup`
 
 2. Navigate to the `functions` folder and install dependencies:
 
@@ -36,7 +36,7 @@ To install this extension, you first need to [set up a Firebase project](https:/
    
     `npm install`
 
-4. Navigate back to the `backup-firebase-auth` folder and install the extension into your local Firebase project (you will be prompted to select a project during installation):
+4. Navigate back to the `auth-scheduled-backup` folder and install the extension into your local Firebase project (you will be prompted to select a project during installation):
 
     `cd ..`
    
@@ -100,7 +100,7 @@ To run the system tests, you first need to [set up a Firebase project](https://f
 
 2. Optional: Download a service account key for the Firebase project you want to test with and save it as `functions/tests/configs/serviceAccountKey.json`. This is required if you want to test the extension with a live Firebase project in addition to using the fakes.
 
-3. Optional: Start the Firebase Emulator Suite by running the below command in the `backup-firebase-auth` directory. This is required if you want to run the tests that use the Firebase Emulator Suite.
+3. Optional: Start the Firebase Emulator Suite by running the below command in the `auth-scheduled-backup` directory. This is required if you want to run the tests that use the Firebase Emulator Suite.
 
     `firebase emulators:start`
 
