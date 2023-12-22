@@ -22,16 +22,18 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18.x'
-  
-      - name: Install dependencies
-        run: |
-          cd extension
-          npm install
 
-      - name: Build
+      - name: Install src dependencies and build
         run: |
-          cd extension
-          npm run build --if-present
+          cd extension/src
+          npm install
+          npm run build -if-present
+  
+      - name: Install test dependencies and build
+        run: |
+          cd extension/tests
+          npm install
+          npm run build -if-present
 
       - name: Create serviceAccountKey.json
         env:
