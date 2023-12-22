@@ -3,7 +3,7 @@
   "scripts": {
     "lint": "eslint \"./**/*.ts\"",
     "lint:fix": "eslint \"./**/*.ts\" --fix",
-    "build": "npm run lint:fix && tsc",
+    "build": "tsc",
     "build:watch": "tsc --watch"
   },
   "main": "lib/index.js",
