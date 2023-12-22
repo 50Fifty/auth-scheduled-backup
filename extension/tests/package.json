@@ -1,13 +1,13 @@
 {
   "name": "extension",
   "scripts": {
-    "lint": "eslint \"src/**/*\"",
-    "lint:fix": "eslint \"src/**/*\" --fix",
+    "lint": "eslint \"**/*\"",
+    "lint:fix": "eslint \"**/*\" --fix",
     "build": "npm run lint:fix && tsc",
     "build:watch": "tsc --watch",
-    "test:unit": "mocha -r ts-node/register tests/unit-tests/**/*.spec.ts",
-    "test:integration": "mocha -r ts-node/register tests/integration-tests/**/*.spec.ts",
-    "test:system": "mocha -r ts-node/register tests/system-tests/**/*.spec.ts"
+    "test:unit": "mocha -r ts-node/register unit-tests/**/*.spec.ts",
+    "test:integration": "mocha -r ts-node/register integration-tests/**/*.spec.ts",
+    "test:system": "mocha -r ts-node/register system-tests/**/*.spec.ts"
   },
   "main": "lib/index.js",
   "dependencies": {
