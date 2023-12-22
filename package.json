@@ -1,13 +1,13 @@
 {
-  "name": "functions",
+  "name": "extension",
   "scripts": {
-    "lint": "eslint \"functions/src/**/*\"",
-    "lint:fix": "eslint \"functions/src/**/*\" --fix",
+    "lint": "eslint \"extension/src/**/*\"",
+    "lint:fix": "eslint \"extension/src/**/*\" --fix",
     "build": "npm run lint:fix && tsc",
     "build:watch": "tsc --watch",
-    "test:unit": "mocha -r ts-node/register functions/tests/unit-tests/**/*.spec.ts",
-    "test:integration": "mocha -r ts-node/register functions/tests/integration-tests/**/*.spec.ts",
-    "test:system": "mocha -r ts-node/register functions/tests/system-tests/**/*.spec.ts"
+    "test:unit": "mocha -r ts-node/register extension/tests/unit-tests/**/*.spec.ts",
+    "test:integration": "mocha -r ts-node/register extension/tests/integration-tests/**/*.spec.ts",
+    "test:system": "mocha -r ts-node/register extension/tests/system-tests/**/*.spec.ts"
   },
   "main": "lib/index.js",
   "dependencies": {
