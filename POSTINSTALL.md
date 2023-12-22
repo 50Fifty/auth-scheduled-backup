@@ -18,7 +18,7 @@ At the configured time, the extension will create a backup of your Firebase Auth
 
 This extension runs automatically based on your configured schedule. There is no need for manual intervention after setup. Backups are created and stored in the specified Cloud Storage bucket.
 
-To learn more about how this extension works, see the [source code](https://github.com/50Fifty/backup-firebase-auth).
+To learn more about how this extension works, see the [source code](https://github.com/50Fifty/auth-scheduled-backup).
 
 <!-- We recommend keeping the following section to explain how to monitor extensions with Firebase -->
 # Monitoring

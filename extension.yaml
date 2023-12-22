@@ -2,8 +2,8 @@
 # https://firebase.google.com/docs/extensions/reference/extension-yaml
 
 # Identifier for your extension
-name: backup-firebase-auth  
-version: 0.0.1  # Follow semver versioning
+name: auth-scheduled-backup 
+version: 1.0.0  # Follow semver versioning
 specVersion: v1beta  # Version of the Firebase Extensions specification
 
 # Friendly display name for your extension (~3-5 words)
@@ -20,7 +20,7 @@ author:
 license: Apache-2.0  # https://spdx.org/licenses/
 
 # Public URL for the source code of your extension.
-sourceUrl: https://github.com/50Fifty/backup-firebase-auth
+sourceUrl: https://github.com/50Fifty/auth-scheduled-backup
 
 # Specify whether a paid-tier billing plan is required to use your extension.
 # Learn more in the docs: https://firebase.google.com/docs/extensions/reference/extension-yaml#billing-required-field
