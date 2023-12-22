@@ -30,15 +30,11 @@ To install this extension, you first need to [set up a Firebase project](https:/
 
     `git clone https://github.com/50Fifty/auth-scheduled-backup`
 
-2. Navigate to the `functions` folder and install dependencies:
-
-    `cd functions`
+2. Install dependencies:
    
     `npm install`
 
-4. Navigate back to the `auth-scheduled-backup` folder and install the extension into your local Firebase project (you will be prompted to select a project during installation):
-
-    `cd ..`
+4. Install the extension into your local Firebase project (you will be prompted to select a project during installation):
    
     `firebase ext:install .`
 
