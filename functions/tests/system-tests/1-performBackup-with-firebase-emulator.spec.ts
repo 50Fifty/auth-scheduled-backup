@@ -11,6 +11,14 @@ const testName = "1. System Test: performBackup with Firebase Emulator"
 myMocha.describe(testName, function () {
   this.timeout(30000);
 
+  // Check if emulator is running
+  if (testEnvConfig.PUBSUB_EMULATOR_ENDPOINT === undefined) {
+    myMocha.it(`${testName} skipped, emulator not running`, function () {
+      this.skip();
+    });
+    return;
+  }
+
   const googleCloudStorageService = new GoogleCloudStorageService();
   const folderName = new Date().toISOString().split('T')[0];
 
@@ -24,10 +32,6 @@ myMocha.describe(testName, function () {
   });
 
   myMocha.it('Should save users to GCS bucket', async function () {
-    if (testEnvConfig.PUBSUB_EMULATOR_ENDPOINT === undefined) {
-      this.skip();
-    }
-
     const SCHEDULED_FUNCTION_TOPIC = 'firebase-schedule-backupAuthUsers';
 
     const pubsub = new PubSub({
@@ -45,13 +49,12 @@ myMocha.describe(testName, function () {
     // Wait for scheduled function to run, TODO: find a better way to do this
     await new Promise(resolve => setTimeout(resolve, 10000));
 
-    let manifestData: string;
+    const manifestData = await googleCloudStorageService.getFile({ bucketName: testEnvConfig.BUCKET_NAME, folderName: folderName, fileName: Manifest.fileName })
 
-    try {
-      manifestData = await googleCloudStorageService.getFile({ bucketName: testEnvConfig.BUCKET_NAME, folderName: folderName, fileName: Manifest.fileName })
-    } catch (error) {
-      assert.fail(`manifest.json file not found in ${folderName} folder in ${testEnvConfig.BUCKET_NAME} bucket`);
+    if (!manifestData) {
+      assert.fail(`No manifest.json file found in ${folderName} folder of ${testEnvConfig.BUCKET_NAME} bucket.`);
     }
+
 
     const manifest = Manifest.fromJSON(JSON.parse(manifestData));
     assert(manifest.getNumOfFiles() === manifest.getNumOfChunks(), `Number of backup files (${manifest.getNumOfFiles()}) does not match number of chunks (${manifest.getNumOfChunks()}) in manifest.json`);
@@ -60,6 +63,9 @@ myMocha.describe(testName, function () {
 
     for (const [fileName, fileData] of backupFiles) {
       const fileContents = await googleCloudStorageService.getFile({ bucketName: testEnvConfig.BUCKET_NAME, folderName: folderName, fileName: fileName });
+      if (!fileContents) {
+        assert.fail(`No ${fileName} file found in ${folderName} folder of ${testEnvConfig.BUCKET_NAME} bucket.`);
+      }
       const usersBackup = JSON.parse(fileContents);
 
       assert(usersBackup.length === fileData.count, `Number of users in ${folderName}/${fileName} backup file does not match number of users in manifest.json`);

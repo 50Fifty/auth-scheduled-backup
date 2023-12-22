@@ -36,6 +36,7 @@ export async function performBackup(
   const manifest = new Manifest(bucketName, folderName);
 
   let index = 1;
+  const saveFilePromises: Promise<void>[] = [];
 
   for await (const users of authService.listAllUsers()) {
     if (users.length === 0) {
@@ -47,26 +48,27 @@ export async function performBackup(
     const fileName = `users_chunk_${index}.json`;
 
     manifest.addFile(fileName, users.length);
-    const manifestData = JSON.stringify(manifest.toJSON());
-    // Update manifest.json before saving chunk
-    await storageService.saveFile({
-      bucketName: bucketName,
-      folderName: folderName,
-      fileName: Manifest.fileName, 
-      data: manifestData
-    });
     // Save chunk
-    await storageService.saveFile({
+    const savePromise = storageService.saveFile({
       bucketName: bucketName,
       folderName: folderName,
       fileName: fileName,
       data: backupData
     });
-    loggerInstance.log(`Users backup successfully saved to ${fileName}.`);
+    saveFilePromises.push(savePromise);
+
+    // loggerInstance.log(`Users backup successfully saved to ${fileName}.`);
     index++;
   }
 
-  const manifestData = JSON.stringify(manifest.toJSON({ completed: true }));
+  try {
+    await Promise.allSettled(saveFilePromises);
+  } catch (error) {
+    loggerInstance.error(`Error saving backup: ${error}`);
+  }
+  
+
+  const manifestData = JSON.stringify(manifest.toJSON());
   await storageService.saveFile({
     bucketName: bucketName,
     folderName: folderName,

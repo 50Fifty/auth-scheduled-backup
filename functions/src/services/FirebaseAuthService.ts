@@ -27,18 +27,25 @@ export class FirebaseAuthService implements AuthService {
 
   /**
    * Asynchronously generates batches of user records. Each batch can contain up to `perBatchCount` users.
-   * 
-   * @param {number} perBatchCount - The maximum number of user records to include in each batch.
+   * @param {object} params - Parameters for listing users.
+   * @param {number} params.perBatchCount - The maximum number of user records to include in each batch.
    *                                 Defaults to 10,000 if not specified.
-   * @param {number} maxResult - The maximum number of user records to fetch at a time from listUsers API (max: 1000).
+   * @param {number} params.maxResultPerListUser - The maximum number of user records to fetch at a time from listUsers API (max: 1000).
    * @yields {UserRecord[]} A batch of user records. Each batch can contain up to `perBatchCount` users.
    */
-  async *listAllUsers({ perBatchCount = 10000, maxResult = 1000 } : { perBatchCount?: number, maxResult?: number } = {}): AsyncGenerator<UserRecord[]> {
+  async *listAllUsers({ perBatchCount = 10000 } : { perBatchCount?: number} = {}): AsyncGenerator<UserRecord[]> {
+
+    const listUserLimit = 1000;
+
+    if (perBatchCount < listUserLimit) {
+      throw new Error(`perBatchCount must be greater than ${listUserLimit}`);
+    }
+
     let nextPageToken: string | undefined = undefined;
     let users: UserRecord[] = [];
 
     while (true) {
-      const listUsersResult: ListUsersResult = await this.auth.listUsers(maxResult, nextPageToken);
+      const listUsersResult: ListUsersResult = await this.auth.listUsers(listUserLimit, nextPageToken);
       users.push(...listUsersResult.users);
 
       nextPageToken = listUsersResult.pageToken;

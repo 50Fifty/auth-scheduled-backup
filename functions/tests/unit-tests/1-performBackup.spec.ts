@@ -13,11 +13,12 @@ myMocha.describe(testName, function () {
   const fakeFolderName = new Date().toISOString().split('T')[0]; // e.g. 2023-01-01
   const fakeBucketName = 'fake-bucket';
 
-  const largeDataBool = [false, true];
+  // const largeDataBool = [false, true];
+  const numOfUsers = [0, 1, 10, 100, 1000, 10000, 20000];
 
-  largeDataBool.forEach((largeData) => {
-    myMocha.it(`Should save users to fake bucket with ${largeData ? 'large' : 'small'} data`, async () => {
-      const fakeAuthService = new FakeAuthService({large: largeData});
+  numOfUsers.forEach((num) => {
+    myMocha.it(`Should save users to fake bucket with ${num} users`, async () => {
+      const fakeAuthService = new FakeAuthService({num: num});
       await performBackup(
         {
           storageService: fakeStorageService,
