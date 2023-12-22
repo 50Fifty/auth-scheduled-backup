@@ -15,6 +15,7 @@ export class Manifest {
   static fileName = 'manifest.json';
 
   private bucketName: string;
+  private completedAt: string | null = null;
   private files: Map<string, FileData>;
   private folderName: string;
   private numOfChunks: number;
@@ -47,13 +48,11 @@ export class Manifest {
     return this.numOfChunks;
   }
 
-  toJSON({completed = false}: {completed?: boolean} = {}): ManifestData {
-    const filesObject = Object.fromEntries(this.files);
-
+  toJSON(): ManifestData {
     return {
       bucket: this.bucketName,
-      completed_at: completed ? new Date().toISOString() : null,
-      files: filesObject,
+      completed_at: this.completedAt === null ? new Date().toISOString() : this.completedAt,
+      files: Object.fromEntries(this.files),
       folder: this.folderName,
       num_of_chunks: this.numOfChunks,
       started_at: this.startedAt
@@ -62,6 +61,7 @@ export class Manifest {
 
   static fromJSON(manifestData: ManifestData): Manifest {
     const manifest = new Manifest(manifestData.bucket, manifestData.folder);
+    manifest.completedAt = manifestData.completed_at;
     manifest.numOfChunks = manifestData.num_of_chunks;
     manifest.startedAt = manifestData.started_at;
     manifest.files = new Map(Object.entries(manifestData.files));

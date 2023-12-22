@@ -15,7 +15,6 @@
     "singleProjectMode": true
   },
   "extensions": {
-    "backup-firebase-auth": "."
   },
   "functions": {
     "source": "../../../functions"

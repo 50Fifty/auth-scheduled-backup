@@ -33,8 +33,8 @@ export class GoogleCloudStorageService implements StorageService {
    * @throws {Error} Throws an error if saving the file fails.
    * @return {Promise<void>}
    */
-  async saveFile({ bucketName, folderName, fileName, data}:
-    { bucketName: string, folderName: string, fileName: string, data: string})
+  async saveFile({ bucketName, folderName, fileName, data }:
+    { bucketName: string, folderName: string, fileName: string, data: string })
     : Promise<void> {
     const bucket = this.gcs.bucket(bucketName);
     const file = bucket.file(`${folderName}/${fileName}`);
@@ -54,10 +54,14 @@ export class GoogleCloudStorageService implements StorageService {
    */
   async getFile({ bucketName, folderName, fileName }:
     { bucketName: string, folderName: string, fileName: string }):
-    Promise<string> {
+    Promise<string | null> {
     const bucket = this.gcs.bucket(bucketName);
     const file = bucket.file(`${folderName}/${fileName}`);
-    const [data] = await file.download();
+    const fileExists = await file.exists();
+    if (!fileExists) {
+      return null;
+    }
+    const [data] = await file.download({})
     return data.toString();
   }
 

@@ -7,7 +7,12 @@ export class FakeStorageService implements StorageService {
     fs.writeFileSync(`tests/unit-tests/results/${bucketName}/${folderName}/${fileName}`, data);
   }
   // Helper method to retrieve a file, useful for assertions in tests
-  async getFile({ bucketName, folderName, fileName }: { bucketName: string, folderName: string, fileName: string }): Promise<string | undefined> {
+  async getFile({ bucketName, folderName, fileName }: { bucketName: string, folderName: string, fileName: string }): Promise<string | null> {
+    // check if file exists
+    if (!fs.existsSync(`tests/unit-tests/results/${bucketName}/${folderName}/${fileName}`)) {
+      return Promise.resolve(null);
+    }
+    
     const fileContent = fs.readFileSync(`tests/unit-tests/results/${bucketName}/${folderName}/${fileName}`, 'utf8');
     return Promise.resolve(fileContent);
   }

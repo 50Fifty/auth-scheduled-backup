@@ -25,10 +25,9 @@ export interface StorageService {
    * @param {string} param.bucketName - Name of the bucket to get the file from.
    * @param {string} param.folderName - Name of the folder to get the file from.
    * @param {string} param.fileName - Name of the file to be retrieved.
-   * @returns {Promise<string>} - Promise that resolves with the data content of the file.
-   * @returns {Promise<string>} - Returns the data content of the file.
+   * @returns {Promise<string | null>} - Promise that resolves with the data content of the file.
    */
-  getFile({ bucketName, folderName, fileName }: { bucketName: string, folderName: string, fileName: string }): Promise<string | undefined>;
+  getFile({ bucketName, folderName, fileName }: { bucketName: string, folderName: string, fileName: string }): Promise<string | null>;
 
   /**
    * Delete a folder from a specified storage bucket.
