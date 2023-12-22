@@ -10,8 +10,6 @@ serviceAccountKey.json
 # Typescript v1 declaration files
 typings/
 
-functions/node_modules/
-
 # Visual Studio Code exclude list
 .vscode/
 
@@ -23,3 +21,4 @@ functions/tests/unit-tests/results
 
 # extensions folder
 extensions/
+node_modules

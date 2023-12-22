@@ -25,12 +25,10 @@ jobs:
   
       - name: Install dependencies
         run: |
-          cd functions
           npm install
 
       - name: Build
         run: |
-          cd functions
           npm run build --if-present
 
       - name: Create serviceAccountKey.json
@@ -44,7 +42,6 @@ jobs:
           CRON_SCHEDULE: ${{ secrets.CRON_SCHEDULE }}
           PROJECT_ID: ${{ secrets.PROJECT_ID }}
         run: |
-          cd functions
           npm run test:unit
       
       - name: Run integration tests
@@ -53,7 +50,6 @@ jobs:
           CRON_SCHEDULE: ${{ secrets.CRON_SCHEDULE }}
           PROJECT_ID: ${{ secrets.PROJECT_ID }}
         run: |
-          cd functions
           npm run test:integration
 
       # - name: Install Firebase CLI

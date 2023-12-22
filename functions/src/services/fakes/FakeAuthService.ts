@@ -6,7 +6,7 @@ export class FakeAuthService implements AuthService {
   private users: UserRecord[];
 
   constructor({ num = 0 }: { num?: number } = {}) {
-    this.users = JSON.parse(fs.readFileSync('src/services/fakes/mock_auth_data.json', 'utf8')).slice(0, num);
+    this.users = JSON.parse(fs.readFileSync('functions/src/services/fakes/mock_auth_data.json', 'utf8')).slice(0, num);
   }
 
   async *listAllUsers({ perBatchCount = 1000 }: { perBatchCount?: number } = {}): AsyncGenerator<UserRecord[]> {
