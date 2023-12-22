@@ -3,7 +3,7 @@ import * as myMocha from 'mocha';
 import { performBackup } from '../../src/usecases/perform_backup';
 import { FakeStorageService } from "../../src/services/fakes/FakeStorageService";
 import { FakeAuthService } from "../../src/services/fakes/FakeAuthService";
-import { logger } from "../../src/config";
+import { logger } from "../../src/config/config";
 
 const testName = "1. Unit Test: performBackup with fakes"
 

@@ -5,7 +5,7 @@ import { performBackup } from '../../src/usecases/perform_backup';
 import { GoogleCloudStorageService } from "../../src/services/GoogleCloudStorageService";
 import { FirebaseAuthService } from "../../src/services/FirebaseAuthService";
 import { serviceAccountKeyExists, serviceAccountKeyFilePath, testEnvConfig } from '../configs/test-setup';
-import { logger } from "../../src/config";
+import { logger } from "../../src/config/config";
 import * as admin from "firebase-admin";
 import { Manifest } from '../../src/files/manifest';
 

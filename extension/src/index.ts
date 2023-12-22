@@ -1,6 +1,6 @@
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
-import {cronSchedule, logger} from "./config";
+import {cronSchedule, logger} from "./config/config";
 import {performBackup} from "./usecases/perform_backup";
 import {GoogleCloudStorageService} from "./services/GoogleCloudStorageService";
 import {FirebaseAuthService} from "./services/FirebaseAuthService";
