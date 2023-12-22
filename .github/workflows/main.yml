@@ -34,7 +34,7 @@ jobs:
       - name: Create serviceAccountKey.json
         env:
           SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
-        run: echo $SERVICE_ACCOUNT_KEY | base64 -di > ./functions/tests/configs/serviceAccountKey.json
+        run: echo $SERVICE_ACCOUNT_KEY | base64 -di > ./extension/tests/configs/serviceAccountKey.json
         
       - name: Run unit tests
         env:
@@ -63,5 +63,5 @@ jobs:
       #     PROJECT_ID: ${{ secrets.PROJECT_ID }}
       #     FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       #   run: |
-      #     cd functions/tests/system-tests
+      #     cd extension/tests/system-tests
       #     firebase emulators:exec --project $PROJECT_ID "npm run test:system"
