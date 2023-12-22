@@ -1,48 +1,23 @@
 {
-  "name": "extension",
+  "name": "auth-scheduled-backup",
+  "version": "1.0.0",
+  "description": "> Firebase Extension for any Firebase project that automatically backs up the Authentication users' data to a Google Cloud Storage bucket on a predefined schedule.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
   "scripts": {
-    "lint": "eslint \"extension/src/**/*\"",
-    "lint:fix": "eslint \"extension/src/**/*\" --fix",
-    "build": "npm run lint:fix && tsc",
-    "build:watch": "tsc --watch",
-    "test:unit": "mocha -r ts-node/register extension/tests/unit-tests/**/*.spec.ts",
-    "test:integration": "mocha -r ts-node/register extension/tests/integration-tests/**/*.spec.ts",
-    "test:system": "mocha -r ts-node/register extension/tests/system-tests/**/*.spec.ts"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "main": "lib/index.js",
-  "dependencies": {
-    "@google-cloud/pubsub": "^4.0.7",
-    "@google-cloud/storage": "^7.1.0",
-    "dotenv": "^16.3.1",
-    "firebase-admin": "^11.5.0",
-    "firebase-functions": "^4.2.0"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/50Fifty/auth-scheduled-backup.git"
   },
-  "devDependencies": {
-    "@faker-js/faker": "^8.3.1",
-    "@types/babel__core": "^7.20.5",
-    "@types/chai": "^4.3.4",
-    "@types/dotenv": "^8.2.0",
-    "@types/mocha": "^10.0.3",
-    "@types/proxyquire": "^1.3.30",
-    "@types/sinon": "^10.0.20",
-    "@typescript-eslint/eslint-plugin": "^6.9.1",
-    "@typescript-eslint/parser": "^6.9.1",
-    "axios": "^1.3.2",
-    "chai": "^4.3.7",
-    "cross-env": "^7.0.3",
-    "eslint": "^8.52.0",
-    "eslint-config-google": "^0.14.0",
-    "eslint-plugin-import": "^2.26.0",
-    "firebase-functions-test": "^3.1.0",
-    "mocha": "^10.2.0",
-    "proxyquire": "^2.1.3",
-    "sinon": "^17.0.0",
-    "ts-mocha": "^10.0.0",
-    "ts-node": "^10.9.1",
-    "typescript": "^4.9.5"
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/50Fifty/auth-scheduled-backup/issues"
   },
-  "private": true,
-  "engines": {
-    "node": "18"
-  }
+  "homepage": "https://github.com/50Fifty/auth-scheduled-backup#readme"
 }

@@ -42,6 +42,7 @@ jobs:
           CRON_SCHEDULE: ${{ secrets.CRON_SCHEDULE }}
           PROJECT_ID: ${{ secrets.PROJECT_ID }}
         run: |
+          cd extension
           npm run test:unit
       
       - name: Run integration tests
@@ -50,6 +51,7 @@ jobs:
           CRON_SCHEDULE: ${{ secrets.CRON_SCHEDULE }}
           PROJECT_ID: ${{ secrets.PROJECT_ID }}
         run: |
+          cd extension
           npm run test:integration
 
       # - name: Install Firebase CLI

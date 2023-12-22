@@ -17,7 +17,7 @@ typings/
 .env
 
 # results of unit tests
-tests/unit-tests/results
+extension/tests/unit-tests/results
 
 # extensions folder
 extensions/
