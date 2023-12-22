@@ -1,8 +1,8 @@
 {
   "name": "extension",
   "scripts": {
-    "lint": "eslint \"**/*\"",
-    "lint:fix": "eslint \"**/*\" --fix",
+    "lint": "eslint \"./**/*.ts\"",
+    "lint:fix": "eslint \"./**/*.ts\" --fix",
     "build": "npm run lint:fix && tsc",
     "build:watch": "tsc --watch",
     "test:unit": "mocha -r ts-node/register unit-tests/**/*.spec.ts",
@@ -30,7 +30,7 @@
     "axios": "^1.3.2",
     "chai": "^4.3.7",
     "cross-env": "^7.0.3",
-    "eslint": "^8.52.0",
+    "eslint": "^8.56.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.26.0",
     "firebase-functions-test": "^3.1.0",
