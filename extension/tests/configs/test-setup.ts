@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 import * as fs from "fs";
 
-export const serviceAccountKeyFilePath = "configs/serviceAccountKey.json"
+export const serviceAccountKeyFilePath = "tests/configs/serviceAccountKey.json"
 export const serviceAccountKeyExists = fs.existsSync(serviceAccountKeyFilePath);
 
 dotenv.config({ path: "configs/.env" });
