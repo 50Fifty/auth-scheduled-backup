@@ -4,7 +4,7 @@ import * as fs from "fs";
 export const serviceAccountKeyFilePath = "tests/configs/serviceAccountKey.json"
 export const serviceAccountKeyExists = fs.existsSync(serviceAccountKeyFilePath);
 
-dotenv.config({ path: "configs/.env" });
+dotenv.config({ path: "tests/configs/.env" });
 
 if (!process.env.PROJECT_ID && serviceAccountKeyExists) {
   throw new Error('Service Account Key exists but PROJECT_ID not set in .env file.');
