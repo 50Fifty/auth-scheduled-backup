@@ -70,7 +70,7 @@ The unit tests target the performBackup function in `extension/src/index.ts`.
 
 Unit tests can be run locally. It uses fake data and mocks to simulate the Firebase Authentication and Cloud Storage services.
 
-To run the unit tests, run the following command:
+To run the unit tests, run the following command in the `extension` folder:
 
 `npm run test:unit`
 
@@ -78,7 +78,7 @@ To run the unit tests, run the following command:
 To run the integration tests, you first need to [set up a Firebase project](https://firebase.google.com/docs/projects/learn-more) and [install the Firebase CLI](https://firebase.google.com/docs/cli#install_the_firebase_cli).
 The integration tests are created to test connections to external services such as Firebase Authentication and Cloud Storage.
 
-To run the integration tests, run the following command:
+To run the integration tests, run the following command in the `extension` folder:
 
 `npm run test:integration`
 
@@ -96,13 +96,9 @@ To run the system tests, you first need to [set up a Firebase project](https://f
 
 2. Optional: Download a service account key for the Firebase project you want to test with and save it as `extension/tests/configs/serviceAccountKey.json`. This is required if you want to test the extension with a live Firebase project in addition to using the fakes.
 
-3. Optional: Start the Firebase Emulator Suite by running the below command in the `auth-scheduled-backup` directory. This is required if you want to run the tests that use the Firebase Emulator Suite.
+3. Optional: Run the system tests with the Firebase Emulator Suite by running the below command in the `auth-scheduled-backup` directory. This is required if you want to run the tests that use the Firebase Emulator Suite.
 
-    `firebase emulators:start`
-
-3. Run the system tests:
-   
-    `npm run test:system`
+    `firebase emulators:exec "cd extension && npm run test:system"`
 
 ## License
 This project is licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for more information.
