@@ -11,7 +11,7 @@ Before installing this extension you have to:
 
 ## Installation
 
-You can install this Firebase Extension through the [Firebase console](https://console.firebase.google.com/u/0/project/_/extensions/install?ref=github50fifty) or [Firebase CLI](https://firebase.google.com/docs/extensions/install-extensions).
+You can install this Firebase Extension through the [Firebase console](https://console.firebase.google.com/u/0/project/_/extensions/install?ref=50fifty/auth-scheduled-backup) or [Firebase CLI](https://firebase.google.com/docs/extensions/install-extensions).
 
 
 ### Firebase Console
