@@ -12,7 +12,7 @@ https://firebase.google.com/docs/extensions/publishers/user-documentation#writin
 
 # See it in action
 
-At the configured time, the extension will create a backup of your Firebase Authentication users and store it in the specified Cloud Storage bucket.
+At the configured time of ${param:CRON_SCHEDULE}, the extension will create a backup of your Firebase Authentication users and store it in the specified Cloud Storage bucket: ${param:BUCKET_NAME}.
 
 # Using the extension
 

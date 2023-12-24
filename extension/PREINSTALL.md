@@ -14,6 +14,8 @@ Before installing and using this extension, ensure that your Firebase project me
 1. This extension requires a paid-tier [Blaze plan](https://firebase.google.com/pricing) because it uses Cloud Storage, which incurs costs.
 2. This extension requires a Cloud Storage bucket to store backups ([Additional charges may apply.](https://cloud.google.com/storage/pricing)). Create a bucket in Google Cloud Platform and note the bucket name. You will select this bucket during installation. [Learn more about creating a Cloud Storage bucket](https://cloud.google.com/storage/docs/creating-buckets).
 
+It is highly recommended that you create a Cloud Storage bucket in the same location as your Firebase project. [Learn more about Cloud Storage locations](https://firebase.google.com/docs/storage/locations). During installation, you will select the location of your Cloud Storage bucket. You will also be able to configure the data retention period and many other settings for your backups via the Google Cloud Console.
+
 <!-- We recommend keeping the following section to explain how billing for Firebase Extensions works -->
 # Billing
 

@@ -13,6 +13,9 @@ displayName: Schedule Firebase Authentication Backup
 description: >-
   Schedule a daily/weekly/monthly backup of your Firebase Authentication users to a Cloud Storage bucket.
 
+icon: icon.png
+tags: [auth, backup, scheduled, cron, cloud storage]
+
 author:
   authorName: Foo Jen Sean
   url: https://www.foojensean.com
@@ -21,6 +24,7 @@ license: Apache-2.0  # https://spdx.org/licenses/
 
 # Public URL for the source code of your extension.
 sourceUrl: https://github.com/50Fifty/auth-scheduled-backup
+releaseNotesUrl: https://github.com/50Fifty/auth-scheduled-backup/blob/main/extension/CHANGELOG.md
 
 # Specify whether a paid-tier billing plan is required to use your extension.
 # Learn more in the docs: https://firebase.google.com/docs/extensions/reference/extension-yaml#billing-required-field
