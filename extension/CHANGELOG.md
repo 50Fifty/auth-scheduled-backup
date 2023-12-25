@@ -10,3 +10,7 @@
 - Added an icon.
 - Improved README, PREINSTALL and POSTINSTALL files.
 - Merry Christmas!
+
+## Version 1.0.0 rc.3 (2023-12-26)
+- Added gzip compression to backups.
+- Increased user limit per chunk from 10,000 to 100,000.

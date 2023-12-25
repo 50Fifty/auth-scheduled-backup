@@ -12,6 +12,7 @@ export class GoogleCloudStorageService implements StorageService {
   /** @private @type {storage.SaveOptions} - Save options for the file. */
   private saveOptions: storage.SaveOptions = {
     contentType: "application/json",
+    gzip: true,
     metadata: {
       cacheControl: "no-cache",
     },
@@ -37,6 +38,7 @@ export class GoogleCloudStorageService implements StorageService {
     { bucketName: string, folderName: string, fileName: string, data: string })
     : Promise<void> {
     const bucket = this.gcs.bucket(bucketName);
+    
     const file = bucket.file(`${folderName}/${fileName}`);
     await file.save(data, this.saveOptions);
   }
@@ -61,7 +63,7 @@ export class GoogleCloudStorageService implements StorageService {
     if (!fileExists) {
       return null;
     }
-    const [data] = await file.download({})
+    const [data] = await file.download()
     return data.toString();
   }
 
