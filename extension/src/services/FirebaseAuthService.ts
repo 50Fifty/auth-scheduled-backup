@@ -33,7 +33,7 @@ export class FirebaseAuthService implements AuthService {
    * @param {number} params.maxResultPerListUser - The maximum number of user records to fetch at a time from listUsers API (max: 1000).
    * @yields {UserRecord[]} A batch of user records. Each batch can contain up to `perBatchCount` users.
    */
-  async *listAllUsers({ perBatchCount = 10000 } : { perBatchCount?: number} = {}): AsyncGenerator<UserRecord[]> {
+  async *listAllUsers({ perBatchCount = 100000 } : { perBatchCount?: number} = {}): AsyncGenerator<UserRecord[]> {
 
     const listUserLimit = 1000;
 
