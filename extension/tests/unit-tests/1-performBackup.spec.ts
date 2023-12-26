@@ -10,7 +10,7 @@ const testName = "1. Unit Test: performBackup with fakes"
 myMocha.describe(testName, function () {
   this.timeout(5000);
   const fakeStorageService = new FakeStorageService();
-  const fakeFolderName = new Date().toISOString().split('T')[0]; // e.g. 2023-01-01
+  const fakeFolderName = new Date().toISOString().replace(/:/g, '_');
   const fakeBucketName = 'fake-bucket';
 
   // const largeDataBool = [false, true];

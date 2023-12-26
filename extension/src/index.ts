@@ -16,8 +16,7 @@ exports.backupAuthUsers = functions.pubsub.schedule(cronSchedule).onRun(async ()
   const googleCloudStorageService = new GoogleCloudStorageService();
   const firebaseAuthService = new FirebaseAuthService(admin.auth());
 
-  const curr_datetime = new Date().toISOString().split('T')[0];
-
+  const folderName = new Date().toISOString().replace(/:/g, '_');
   const bucketName = process.env.BUCKET_NAME;
 
   return performBackup(
@@ -25,7 +24,7 @@ exports.backupAuthUsers = functions.pubsub.schedule(cronSchedule).onRun(async ()
       storageService: googleCloudStorageService,
       authService: firebaseAuthService,
       bucketName: bucketName,
-      folderName: curr_datetime,
+      folderName: folderName,
       loggerInstance: logger,
     }
   );

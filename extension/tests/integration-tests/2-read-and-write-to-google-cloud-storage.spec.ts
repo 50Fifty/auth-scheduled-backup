@@ -14,7 +14,7 @@ myMocha.describe(testName, function () {
   }, serviceAccountKeyFilePath);
 
   const googleCloudStorageService = new GoogleCloudStorageService();
-  const folderName = new Date().toISOString().split('T')[0];
+  const folderName = new Date().toISOString().replace(/:/g, '_');
 
   myMocha.before(function () {
     admin.initializeApp({ credential: admin.credential.cert(serviceAccountKeyFilePath) });
