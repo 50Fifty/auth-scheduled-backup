@@ -5,9 +5,6 @@
 
 ![GitHub stars](https://img.shields.io/github/stars/50Fifty/auth-scheduled-backup?style=social) ![GitHub forks](https://img.shields.io/github/forks/50Fifty/auth-scheduled-backup?style=social) ![GitHub watchers](https://img.shields.io/github/watchers/50Fifty/auth-scheduled-backup?style=social)
 
-> [!WARNING]\
-> This project is currently under development and may contain bugs or incomplete features. Use it at your own risk. 
-
 **Author**: Foo Jen Sean (www.foojensean.com)
 
 **Description**: Automatically backs up Firebase Authentication users to a Google Cloud Bucket on a predefined schedule.
@@ -20,27 +17,9 @@ This extension regularly backs up user data from Firebase Authentication. It cap
 
 ## Setup
 
-### Installation (Pre-release)
-> [!CAUTION]
-> Only install on a test project. This extension is currently under development and may contain bugs or incomplete features. Use it at your own risk.
+### Installation
 
-To install this extension, you first need to [set up a Firebase project](https://firebase.google.com/docs/projects/learn-more) and [install the Firebase CLI](https://firebase.google.com/docs/cli#install_the_firebase_cli).
-
-1. Clone this repository:
-
-    `git clone https://github.com/50Fifty/auth-scheduled-backup`
-
-2. Install dependencies:
-   
-    `npm install`
-
-4. Install the extension into your local Firebase project (you will be prompted to select a project during installation):
-   
-    `firebase ext:install .`
-
-6. Deploy your extension configuration to your live project:
-
-    `firebase deploy --only extensions`
+To install this extension for your Firebase project, you can [install it via the Firebase Extensions Hub](https://extensions.dev/extensions/50fifty/auth-scheduled-backup).
 
 ## Usage
 ### Exporting Firebase Authentication Users
