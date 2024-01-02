@@ -1,6 +1,7 @@
 import { Auth , UserImportRecord, UserRecord } from 'firebase-admin/auth';
 import { initializeApp } from 'firebase-admin/app';
 import * as admin from "firebase-admin";
+import * as dotenv from 'dotenv'
 
 import fs from 'fs';
 
@@ -13,7 +14,6 @@ async function importAuthUsers(users: any[]) {
   for (let i = 0; i < users.length; i += chunkSize) {
     const chunk = users.slice(i, i + chunkSize);
 
-    // Convert passwordHash and passwordSalt to byte buffers.
     chunk.forEach(user => {
       if (user.passwordHash) {
         user.passwordHash = Buffer.from(user.passwordHash, 'base64');
@@ -47,6 +47,9 @@ if (!fs.existsSync('./users')) {
 
 // Read service account key.
 const app = initializeApp({credential: admin.credential.cert('./serviceAccountKey.json')});
+
+// Load config from .env file.
+dotenv.config();
 
 // Read users.
 for (const file of fs.readdirSync('./users')) {
