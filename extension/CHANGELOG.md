@@ -21,3 +21,7 @@
 ## Version 1.0.0 (2023-12-27)
 - Initial stable release.
 - Removed unused image for README.
+
+## Version 1.0.1 (2024-01-03)
+- Changed icon.
+- Fixed link to documentation in PREINSTALL.md.
