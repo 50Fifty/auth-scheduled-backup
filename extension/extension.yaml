@@ -3,7 +3,7 @@
 
 # Identifier for your extension
 name: auth-scheduled-backup 
-version: 1.0.0  # Follow semver versioning
+version: 1.0.1  # Follow semver versioning
 specVersion: v1beta  # Version of the Firebase Extensions specification
 
 # Friendly display name for your extension (~3-5 words)
