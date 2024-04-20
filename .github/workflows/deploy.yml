@@ -35,7 +35,7 @@ jobs:
     - name: Upload Firebase Extension
       run: |
         firebase ext:dev:upload ${{ secrets.FIREBASE_PUBLISHER_ID }}/${{ secrets.FIREBASE_EXTENSION_ID }} \
-        --repo "https://github.com/50Fifty/auth-scheduled-backup" \
+        --repo "https://github.com/50Fifty/auth-scheduled-backup/extension" \
         --ref "main" \
         --stage ${{ github.event.inputs.stage }} \
         --force
