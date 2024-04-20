@@ -27,9 +27,11 @@
 - Fixed link to documentation in PREINSTALL.md.
 
 ## Version 1.0.2 (2024-04-20)
-- Removed unused dependencies.
 - Updated dependencies to fix security vulnerabilities.
     - `firebase-admin` to 12.1.0.
     - `firebase-functions` to 4.9.0.
     - `firebase-functions-test` to 3.2.0.
     - `typescript` to 5.3.3.
+- Changed function runtime to use nodejs20.
+- Removed unused dependencies.
+- Removed use of devDependencies.
