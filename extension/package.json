@@ -1,8 +1,8 @@
 {
   "name": "auth-scheduled-backup-dev-dependencies",
   "scripts": {
-    "lint": "eslint \"./**/*.ts\"",
-    "lint:fix": "eslint \"./**/*.ts\" --fix",
+    "lint": "./node_modules/.bin/eslint \"./**/*.ts\"",
+    "lint:fix": "./node_modules/.bin/eslint \"./**/*.ts\" --fix",
     "build": "npm run lint:fix && tsc",
     "build:watch": "tsc --watch",
     "test:unit": "mocha -r ts-node/register tests/unit-tests/**/*.spec.ts",
