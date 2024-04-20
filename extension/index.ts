@@ -1,9 +1,9 @@
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
-import {cronSchedule, logger} from "./config/config";
-import {performBackup} from "./usecases/perform_backup";
-import {GoogleCloudStorageService} from "./services/GoogleCloudStorageService";
-import {FirebaseAuthService} from "./services/FirebaseAuthService";
+import {cronSchedule, logger} from "./src/config/config";
+import {performBackup} from "./src/usecases/perform_backup";
+import {GoogleCloudStorageService} from "./src/services/GoogleCloudStorageService";
+import {FirebaseAuthService} from "./src/services/FirebaseAuthService";
 import * as dotenv from "dotenv";
 
 exports.backupAuthUsers = functions.pubsub.schedule(cronSchedule).onRun(async () => {

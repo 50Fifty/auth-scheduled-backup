@@ -58,7 +58,7 @@ resources:
       scheduleTrigger:
         schedule: ${param:CRON_SCHEDULE}
       runtime: "nodejs20"
-      sourceDirectory: "src"
+      sourceDirectory: "."
 
 # In the `params` field, set up your extension's user-configured parameters.
 # Learn more in the docs:

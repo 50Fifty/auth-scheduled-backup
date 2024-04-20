@@ -9,7 +9,7 @@
     "test:integration": "mocha -r ts-node/register tests/integration-tests/**/*.spec.ts",
     "test:system": "mocha -r ts-node/register tests/system-tests/**/*.spec.ts"
   },
-  "main": "src/lib/index.js",
+  "main": "index.js",
   "dependencies": {
     "@google-cloud/pubsub": "^4.0.7",
     "@google-cloud/storage": "^7.1.0",
