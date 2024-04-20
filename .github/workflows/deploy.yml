@@ -1,4 +1,4 @@
-name: Upload Firebase Extension
+name: Upload auth-scheduled-backup extension
 
 on:
   workflow_dispatch:
