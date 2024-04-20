@@ -31,11 +31,10 @@ jobs:
       env:
           FIREBASE_PUBLISHER_ID: ${{ secrets.FIREBASE_PUBLISHER_ID }}
           FIREBASE_EXTENSION_ID: ${{ secrets.FIREBASE_EXTENSION_ID }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.SERVICE_ACCOUNT_KEY }}
       run: |
         firebase ext:dev:upload ${FIREBASE_PUBLISHER_ID}/${FIREBASE_EXTENSION_ID} \
         --repo "https://github.com/50Fifty/auth-scheduled-backup" \
         --ref "main" \
         --root "extension" \
-        --stage ${{ github.event.inputs.stage }} \
-        --token ${{ secrets.FIREBASE_CI_TOKEN }}
-      
+        --stage ${{ github.event.inputs.stage }}
