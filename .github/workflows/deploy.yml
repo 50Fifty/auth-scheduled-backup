@@ -27,14 +27,16 @@ jobs:
     - name: Install Firebase CLI
       run: npm install -g firebase-tools
 
-    - name: Upload Firebase Extension
-      env:
-          FIREBASE_PUBLISHER_ID: ${{ secrets.FIREBASE_PUBLISHER_ID }}
-          FIREBASE_EXTENSION_ID: ${{ secrets.FIREBASE_EXTENSION_ID }}
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+    - name: Authenticate with Firebase
       run: |
-        firebase ext:dev:upload ${FIREBASE_PUBLISHER_ID}/${FIREBASE_EXTENSION_ID} \
+        echo "${{ secrets.SERVICE_ACCOUNT_KEY }}" | base64 --decode > "$HOME/service-account-key.json"
+        echo "GOOGLE_APPLICATION_CREDENTIALS=$HOME/service-account-key.json" >> $GITHUB_ENV
+
+    - name: Upload Firebase Extension
+      run: |
+        firebase ext:dev:upload ${{ secrets.FIREBASE_PUBLISHER_ID }}/${{ secrets.FIREBASE_EXTENSION_ID }} \
         --repo "https://github.com/50Fifty/auth-scheduled-backup" \
         --ref "main" \
         --root "extension" \
         --stage ${{ github.event.inputs.stage }}
+          
