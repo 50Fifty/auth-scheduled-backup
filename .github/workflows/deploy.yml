@@ -38,6 +38,6 @@ jobs:
         --repo "https://github.com/50Fifty/auth-scheduled-backup" \
         --ref "main" \
         --root "extension" \
-        --stage ${{ github.event.inputs.stage }}
+        --stage ${{ github.event.inputs.stage }} \
         --force
           
