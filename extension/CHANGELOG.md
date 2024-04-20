@@ -32,4 +32,4 @@
     - `firebase-admin` to 12.1.0.
     - `firebase-functions` to 4.9.0.
     - `firebase-functions-test` to 3.2.0.
-    - `typescript` to 5.4.5.
+    - `typescript` to 5.3.3.
