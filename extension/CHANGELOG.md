@@ -26,7 +26,7 @@
 - Changed icon.
 - Fixed link to documentation in PREINSTALL.md.
 
-## Version 1.0.2-rc.0 (2024-04-20)
+## Version 1.0.2 (2024-04-20)
 - Removed unused dependencies.
 - Updated dependencies to fix security vulnerabilities.
     - `firebase-admin` to 12.1.0.
