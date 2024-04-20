@@ -39,4 +39,5 @@ jobs:
         --ref "main" \
         --root "extension" \
         --stage ${{ github.event.inputs.stage }}
+        --force
           
