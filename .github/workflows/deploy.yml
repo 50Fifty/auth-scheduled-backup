@@ -1,0 +1,41 @@
+name: Upload auth-scheduled-backup extension
+
+on:
+  workflow_dispatch:
+    inputs:
+      stage:
+        description: 'Release Stage'
+        required: true
+        type: choice
+        options:
+          - alpha
+          - beta
+          - rc
+          - stable
+
+jobs:
+  upload_extension:
+    runs-on: ubuntu-latest
+    environment: deploy
+
+    steps:
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+
+    - name: Install Firebase CLI
+      run: npm install -g firebase-tools
+
+    - name: Upload Firebase Extension
+      env:
+          FIREBASE_PUBLISHER_ID: ${{ secrets.FIREBASE_PUBLISHER_ID }}
+          FIREBASE_EXTENSION_ID: ${{ secrets.FIREBASE_EXTENSION_ID }}
+      run: |
+        firebase ext:dev:upload ${FIREBASE_PUBLISHER_ID}/${FIREBASE_EXTENSION_ID} \
+        --repo "https://github.com/50Fifty/auth-scheduled-backup" \
+        --ref "main" \
+        --root "extension" \
+        --stage ${{ github.event.inputs.stage }} \
+        --token ${{ secrets.FIREBASE_CI_TOKEN }}
+      
