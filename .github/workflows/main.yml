@@ -1,6 +1,7 @@
 name: Run unit and integration tests
 
-on:  
+on:
+  workflow_dispatch:
   pull_request:
     branches:
       - main
