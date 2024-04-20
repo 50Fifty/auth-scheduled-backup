@@ -3,7 +3,7 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint \"./**/*.ts\"",
     "lint:fix": "./node_modules/.bin/eslint \"./**/*.ts\" --fix",
-    "build": "npm run lint:fix && tsc",
+    "build": "tsc",
     "build:watch": "tsc --watch",
     "test:unit": "mocha -r ts-node/register tests/unit-tests/**/*.spec.ts",
     "test:integration": "mocha -r ts-node/register tests/integration-tests/**/*.spec.ts",
