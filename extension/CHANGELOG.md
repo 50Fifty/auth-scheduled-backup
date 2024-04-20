@@ -25,3 +25,11 @@
 ## Version 1.0.1 (2024-01-03)
 - Changed icon.
 - Fixed link to documentation in PREINSTALL.md.
+
+## Version 1.0.2-rc.0 (2024-04-20)
+- Removed unused dependencies.
+- Updated dependencies to fix security vulnerabilities.
+    - `firebase-admin` to 12.1.0.
+    - `firebase-functions` to 4.9.0.
+    - `firebase-functions-test` to 3.2.0.
+    - `typescript` to 5.4.5.
