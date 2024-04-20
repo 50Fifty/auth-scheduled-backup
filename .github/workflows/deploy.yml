@@ -37,7 +37,7 @@ jobs:
         firebase ext:dev:upload ${{ secrets.FIREBASE_PUBLISHER_ID }}/${{ secrets.FIREBASE_EXTENSION_ID }} \
         --repo "https://github.com/50Fifty/auth-scheduled-backup" \
         --ref "main" \
-        --root "extension" \
+        --root "/extension" \
         --stage ${{ github.event.inputs.stage }} \
         --force
           
