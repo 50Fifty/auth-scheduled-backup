@@ -1,5 +1,5 @@
 {
-  "name": "auth-scheduled-backup-dev-dependencies",
+  "name": "auth-scheduled-backup-dependencies",
   "scripts": {
     "lint": "./node_modules/.bin/eslint \"./**/*.ts\"",
     "lint:fix": "./node_modules/.bin/eslint \"./**/*.ts\" --fix",
@@ -9,7 +9,7 @@
     "test:integration": "mocha -r ts-node/register tests/integration-tests/**/*.spec.ts",
     "test:system": "mocha -r ts-node/register tests/system-tests/**/*.spec.ts"
   },
-  "main": "index.js",
+  "main": "./src/index.js",
   "dependencies": {
     "@google-cloud/pubsub": "^4.0.7",
     "@google-cloud/storage": "^7.1.0",
