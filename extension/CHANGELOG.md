@@ -32,6 +32,6 @@
     - `firebase-functions` to 4.9.0.
     - `firebase-functions-test` to 3.2.0.
     - `typescript` to 5.3.3.
-- Changed function runtime to use nodejs20.
+- Upgraded function runtime to use nodejs20.
 - Removed unused dependencies.
 - Removed use of devDependencies.
