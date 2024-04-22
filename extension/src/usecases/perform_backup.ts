@@ -15,21 +15,21 @@ import { Manifest } from "../files/manifest";
  * @param {AuthService} params.authService - The authentication service to fetch user data.
  * @param {string | undefined} params.bucketName - The name of the bucket to save the backups. If undefined, the operation is aborted.
  * @param {string} params.folderName - The name of the folder in the bucket where backups are saved.
- * @param {typeof functions.logger} params.loggerInstance - The logging instance for logging messages.
+ * @param {typeof functions.logger} params.logger - The logging instance for logging messages.
  * @return {Promise<void>} A promise that resolves when the backup process is complete.
  */
 export async function performBackup(
-  { storageService, authService, bucketName, folderName, loggerInstance }:
+  { storageService, authService, bucketName, folderName, logger }:
     {
       storageService: StorageService,
       authService: AuthService,
       bucketName: string | undefined,
       folderName: string,
-      loggerInstance: typeof functions.logger
+      logger: typeof functions.logger
     }
 ): Promise<void> {
   if (!bucketName) {
-    loggerInstance.error("BUCKET_NAME environment variable not set.");
+    logger.error("BUCKET_NAME environment variable not set");
     return;
   }
 
@@ -40,15 +40,17 @@ export async function performBackup(
 
   for await (const users of authService.listAllUsers()) {
     if (users.length === 0) {
-      loggerInstance.log("No users to backup.");
+      logger.log("No users to backup.");
       break;
     }
 
     const backupData = JSON.stringify(users);
     const fileName = `users_chunk_${index}.json`;
 
+    logger.log(`Saving backup to ${fileName}...`);
+
     manifest.addFile(fileName, users.length);
-    // Save chunk
+
     const savePromise = storageService.saveFile({
       bucketName: bucketName,
       folderName: folderName,
@@ -57,16 +59,19 @@ export async function performBackup(
     });
     saveFilePromises.push(savePromise);
 
-    // loggerInstance.log(`Users backup successfully saved to ${fileName}.`);
     index++;
   }
 
-  try {
-    await Promise.allSettled(saveFilePromises);
-  } catch (error) {
-    loggerInstance.error(`Error saving backup: ${error}`);
-  }
-  
+  const results = await Promise.allSettled(saveFilePromises);
+  results.forEach((result: PromiseSettledResult<void>, index: number) => {
+    if (result.status === "fulfilled") {
+      logger.log(`Backup for file index ${index} saved successfully`);
+    }
+
+    if (result.status === "rejected") {
+      logger.error(`Backup for file index ${index} failed: ${(result.reason as Error).message}`);
+    }
+  });
 
   const manifestData = JSON.stringify(manifest.toJSON());
   await storageService.saveFile({
@@ -75,4 +80,6 @@ export async function performBackup(
     fileName: Manifest.fileName,
     data: manifestData
   });
+
+  logger.log("Backup process completed");
 }

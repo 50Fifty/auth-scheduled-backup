@@ -6,7 +6,9 @@ import {GoogleCloudStorageService} from "./services/GoogleCloudStorageService";
 import {FirebaseAuthService} from "./services/FirebaseAuthService";
 import * as dotenv from "dotenv";
 
-exports.backupAuthUsers = functions.pubsub.schedule(cronSchedule).onRun(async () => {
+exports.backupAuthUsers = functions
+  .runWith({timeoutSeconds: 540, memory: "2GB"})
+  .pubsub.schedule(cronSchedule).onRun(async () => {
   if (process.env.FUNCTIONS_EMULATOR) {
     dotenv.config({ path: "./tests/configs/.env" });
   }
@@ -25,7 +27,7 @@ exports.backupAuthUsers = functions.pubsub.schedule(cronSchedule).onRun(async ()
       authService: firebaseAuthService,
       bucketName: bucketName,
       folderName: folderName,
-      loggerInstance: logger,
+      logger: logger,
     }
   );
 });
