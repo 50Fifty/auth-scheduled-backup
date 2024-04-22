@@ -44,7 +44,7 @@ myMocha.describe(testName, function () {
         authService: new FirebaseAuthService(admin.auth()),
         folderName: folderName,
         bucketName: testEnvConfig.BUCKET_NAME,
-        loggerInstance: logger
+        logger: logger
       }
     );
 

@@ -25,7 +25,7 @@ myMocha.describe(testName, function () {
           authService: fakeAuthService,
           folderName: fakeFolderName,
           bucketName: fakeBucketName,
-          loggerInstance: logger
+          logger: logger
         }
       );
 
