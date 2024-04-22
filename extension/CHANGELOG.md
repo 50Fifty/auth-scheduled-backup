@@ -33,5 +33,6 @@
     - `firebase-functions-test` to 3.2.0.
     - `typescript` to 5.3.3.
 - Upgraded function runtime to use nodejs20.
+- Specified function memory of 2GB and timeout of 540s.
 - Removed unused dependencies.
 - Removed use of devDependencies.
