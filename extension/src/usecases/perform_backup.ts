@@ -65,11 +65,11 @@ export async function performBackup(
   const results = await Promise.allSettled(saveFilePromises);
   results.forEach((result: PromiseSettledResult<void>, index: number) => {
     if (result.status === "fulfilled") {
-      logger.log(`Backup for file index ${index} saved successfully`);
+      logger.log(`Backup for chunk ${index + 1} completed`);
     }
 
     if (result.status === "rejected") {
-      logger.error(`Backup for file index ${index} failed: ${(result.reason as Error).message}`);
+      logger.error(`Backup for chunk ${index + 1} failed: ${(result.reason as Error).message}`);
     }
   });
 
