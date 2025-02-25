@@ -78,6 +78,8 @@ To run the system tests, you first need to [set up a Firebase project](https://f
 3. Optional: Run the system tests with the Firebase Emulator Suite by running the below command in the `auth-scheduled-backup` directory. This is required if you want to run the tests that use the Firebase Emulator Suite.
 
     `firebase emulators:exec "cd extension && npm run test:system"`
+### Importing users back to your Firebase project
+To import your users back to the Firebase project. You can refer to this [repository](https://github.com/50Fifty/auth-scheduled-backup-import).
 
 ## License
 This project is licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for more information.
