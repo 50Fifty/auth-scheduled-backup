@@ -18,7 +18,7 @@
     "dotenv": "^16.3.1",
     "eslint": "^8.56.0",
     "firebase-admin": "^12.1.0",
-    "firebase-functions": "^4.9.0",
+    "firebase-functions": "^6.1.0",
     "typescript": "^5.3.3",
     "@faker-js/faker": "^8.3.1",
     "@types/babel__core": "^7.20.5",
