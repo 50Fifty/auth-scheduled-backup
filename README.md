@@ -86,7 +86,7 @@ This project is licensed under the Apache License, Version 2.0. See [LICENSE](LI
 
 ## Contact
 If you have any questions or need assistance, you can reach out to me at:
-- Email: jenseanfoo@gmail.com
+- Email: me@foojensean.com
 
 ## Further Resources
 For more information about Firebase Authentication and its features, you can refer to the official [Firebase Authentication Documentation](https://firebase.google.com/docs/auth).
